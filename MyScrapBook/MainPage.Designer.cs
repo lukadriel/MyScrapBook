@@ -45,8 +45,10 @@
             // mainCalendar
             // 
             this.mainCalendar.Location = new System.Drawing.Point(462, 153);
+            this.mainCalendar.MaxSelectionCount = 1;
             this.mainCalendar.Name = "mainCalendar";
             this.mainCalendar.TabIndex = 0;
+            this.mainCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mainCalendar_DateChanged);
             // 
             // groupBox1
             // 
@@ -61,6 +63,7 @@
             // 
             // buttonView
             // 
+            this.buttonView.Enabled = false;
             this.buttonView.Location = new System.Drawing.Point(6, 135);
             this.buttonView.Name = "buttonView";
             this.buttonView.Size = new System.Drawing.Size(115, 52);
@@ -71,6 +74,7 @@
             // 
             // buttonEdit
             // 
+            this.buttonEdit.Enabled = false;
             this.buttonEdit.Location = new System.Drawing.Point(6, 77);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(115, 52);

@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddTag.Designer.cs">
+      <DependentUpon>AddTag.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseDataSet.cs">
       <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
     </Compile>
@@ -86,6 +93,9 @@
     <Compile Include="ViewPage.Designer.cs">
       <DependentUpon>ViewPage.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddTag.resx">
+      <DependentUpon>AddTag.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditPage.resx">
       <DependentUpon>EditPage.cs</DependentUpon>
     </EmbeddedResource>
