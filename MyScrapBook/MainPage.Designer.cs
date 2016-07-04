@@ -28,18 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.mainCalendar = new System.Windows.Forms.MonthCalendar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonView = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
-            this.databaseDataSet = new MyScrapBook.DatabaseDataSet();
-            this.pageTableAdapter = new MyScrapBook.DatabaseDataSetTableAdapters.PageTableAdapter();
-            this.pageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // mainCalendar
@@ -93,20 +87,6 @@
             this.buttonNew.UseVisualStyleBackColor = true;
             this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
-            // databaseDataSet
-            // 
-            this.databaseDataSet.DataSetName = "DatabaseDataSet";
-            this.databaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // pageTableAdapter
-            // 
-            this.pageTableAdapter.ClearBeforeFill = true;
-            // 
-            // pageBindingSource
-            // 
-            this.pageBindingSource.DataMember = "Page";
-            this.pageBindingSource.DataSource = this.databaseDataSet;
-            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -118,8 +98,6 @@
             this.Text = "Start";
             this.Load += new System.EventHandler(this.MainPage_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -131,9 +109,10 @@
         private System.Windows.Forms.Button buttonView;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonNew;
-        private DatabaseDataSet databaseDataSet;
-        private DatabaseDataSetTableAdapters.PageTableAdapter pageTableAdapter;
-        private System.Windows.Forms.BindingSource pageBindingSource;
+        private System.Data.OleDb.OleDbConnection objConn;
+        private System.Data.OleDb.OleDbDataAdapter daPage;
+        private System.Data.DataSet dsDB;
+        private string connexionString;
     }
 }
 

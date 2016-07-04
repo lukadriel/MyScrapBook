@@ -47,11 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddTag.cs">
+    <Compile Include="ManageImage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddTag.Designer.cs">
-      <DependentUpon>AddTag.cs</DependentUpon>
+    <Compile Include="ManageImage.Designer.cs">
+      <DependentUpon>ManageImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageTag.Designer.cs">
+      <DependentUpon>ManageTag.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseDataSet.cs">
       <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
@@ -93,8 +99,11 @@
     <Compile Include="ViewPage.Designer.cs">
       <DependentUpon>ViewPage.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddTag.resx">
-      <DependentUpon>AddTag.cs</DependentUpon>
+    <EmbeddedResource Include="ManageImage.resx">
+      <DependentUpon>ManageImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageTag.resx">
+      <DependentUpon>ManageTag.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditPage.resx">
       <DependentUpon>EditPage.cs</DependentUpon>

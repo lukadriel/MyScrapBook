@@ -16,6 +16,13 @@ namespace MyScrapBook
         public MainPage()
         {
             InitializeComponent();
+            connexionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=DatabaseScrap.accdb";
+            objConn = new OleDbConnection(connexionString);
+            objConn.Open();
+            dsDB = new DataSet();
+            daPage = new OleDbDataAdapter("Select * from Page", objConn);
+            daPage.FillSchema(dsDB, SchemaType.Source, "Page");
+            daPage.Fill(dsDB, "Page");
         }
 
         private void buttonNew_Click(object sender, EventArgs e)
@@ -50,10 +57,9 @@ namespace MyScrapBook
 
         private void MainPage_Load(object sender, EventArgs e)
         {
-            pageTableAdapter.GetData();
-            pageTableAdapter.Fill(databaseDataSet.Page);
+
             DateTime d = new DateTime();
-            foreach(DataRow row in databaseDataSet.Page.Rows)
+            foreach(DataRow row in dsDB.Tables["Page"].Rows)
             {
                 d = DateTime.Parse(row["pageDate"].ToString());
                 mainCalendar.AddBoldedDate(d);
