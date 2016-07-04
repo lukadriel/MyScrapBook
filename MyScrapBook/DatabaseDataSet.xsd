@@ -237,7 +237,7 @@
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT tagNum, tagName FROM Tag</CommandText>
                     <Parameters />
                   </DbCommand>
@@ -269,7 +269,7 @@
   <xs:element name="DatabaseDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DatabaseDataSet" msprop:Generator_UserDSName="DatabaseDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Image" msprop:Generator_TableClassName="ImageDataTable" msprop:Generator_TableVarName="tableImage" msprop:Generator_TablePropName="Image" msprop:Generator_RowDeletingName="ImageRowDeleting" msprop:Generator_RowChangingName="ImageRowChanging" msprop:Generator_RowEvHandlerName="ImageRowChangeEventHandler" msprop:Generator_RowDeletedName="ImageRowDeleted" msprop:Generator_UserTableName="Image" msprop:Generator_RowChangedName="ImageRowChanged" msprop:Generator_RowEvArgName="ImageRowChangeEvent" msprop:Generator_RowClassName="ImageRow">
+        <xs:element name="Image" msprop:Generator_TableClassName="ImageDataTable" msprop:Generator_TableVarName="tableImage" msprop:Generator_RowChangedName="ImageRowChanged" msprop:Generator_TablePropName="Image" msprop:Generator_RowDeletingName="ImageRowDeleting" msprop:Generator_RowChangingName="ImageRowChanging" msprop:Generator_RowEvHandlerName="ImageRowChangeEventHandler" msprop:Generator_RowDeletedName="ImageRowDeleted" msprop:Generator_RowClassName="ImageRow" msprop:Generator_UserTableName="Image" msprop:Generator_RowEvArgName="ImageRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="imageNum" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnimageNum" msprop:Generator_ColumnPropNameInRow="imageNum" msprop:Generator_ColumnPropNameInTable="imageNumColumn" msprop:Generator_UserColumnName="imageNum" type="xs:int" />
@@ -297,7 +297,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Page" msprop:Generator_TableClassName="PageDataTable" msprop:Generator_TableVarName="tablePage" msprop:Generator_TablePropName="Page" msprop:Generator_RowDeletingName="PageRowDeleting" msprop:Generator_RowChangingName="PageRowChanging" msprop:Generator_RowEvHandlerName="PageRowChangeEventHandler" msprop:Generator_RowDeletedName="PageRowDeleted" msprop:Generator_UserTableName="Page" msprop:Generator_RowChangedName="PageRowChanged" msprop:Generator_RowEvArgName="PageRowChangeEvent" msprop:Generator_RowClassName="PageRow">
+        <xs:element name="Page" msprop:Generator_TableClassName="PageDataTable" msprop:Generator_TableVarName="tablePage" msprop:Generator_RowChangedName="PageRowChanged" msprop:Generator_TablePropName="Page" msprop:Generator_RowDeletingName="PageRowDeleting" msprop:Generator_RowChangingName="PageRowChanging" msprop:Generator_RowEvHandlerName="PageRowChangeEventHandler" msprop:Generator_RowDeletedName="PageRowDeleted" msprop:Generator_RowClassName="PageRow" msprop:Generator_UserTableName="Page" msprop:Generator_RowEvArgName="PageRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="pageNum" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnpageNum" msprop:Generator_ColumnPropNameInRow="pageNum" msprop:Generator_ColumnPropNameInTable="pageNumColumn" msprop:Generator_UserColumnName="pageNum" type="xs:int" />
@@ -313,7 +313,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="pageImage" msprop:Generator_TableClassName="pageImageDataTable" msprop:Generator_TableVarName="tablepageImage" msprop:Generator_TablePropName="pageImage" msprop:Generator_RowDeletingName="pageImageRowDeleting" msprop:Generator_RowChangingName="pageImageRowChanging" msprop:Generator_RowEvHandlerName="pageImageRowChangeEventHandler" msprop:Generator_RowDeletedName="pageImageRowDeleted" msprop:Generator_UserTableName="pageImage" msprop:Generator_RowChangedName="pageImageRowChanged" msprop:Generator_RowEvArgName="pageImageRowChangeEvent" msprop:Generator_RowClassName="pageImageRow">
+        <xs:element name="pageImage" msprop:Generator_TableClassName="pageImageDataTable" msprop:Generator_TableVarName="tablepageImage" msprop:Generator_RowChangedName="pageImageRowChanged" msprop:Generator_TablePropName="pageImage" msprop:Generator_RowDeletingName="pageImageRowDeleting" msprop:Generator_RowChangingName="pageImageRowChanging" msprop:Generator_RowEvHandlerName="pageImageRowChangeEventHandler" msprop:Generator_RowDeletedName="pageImageRowDeleted" msprop:Generator_RowClassName="pageImageRow" msprop:Generator_UserTableName="pageImage" msprop:Generator_RowEvArgName="pageImageRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="pageNum" msprop:Generator_ColumnVarNameInTable="columnpageNum" msprop:Generator_ColumnPropNameInRow="pageNum" msprop:Generator_ColumnPropNameInTable="pageNumColumn" msprop:Generator_UserColumnName="pageNum" type="xs:int" />
@@ -321,7 +321,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="pageTag" msprop:Generator_TableClassName="pageTagDataTable" msprop:Generator_TableVarName="tablepageTag" msprop:Generator_TablePropName="pageTag" msprop:Generator_RowDeletingName="pageTagRowDeleting" msprop:Generator_RowChangingName="pageTagRowChanging" msprop:Generator_RowEvHandlerName="pageTagRowChangeEventHandler" msprop:Generator_RowDeletedName="pageTagRowDeleted" msprop:Generator_UserTableName="pageTag" msprop:Generator_RowChangedName="pageTagRowChanged" msprop:Generator_RowEvArgName="pageTagRowChangeEvent" msprop:Generator_RowClassName="pageTagRow">
+        <xs:element name="pageTag" msprop:Generator_TableClassName="pageTagDataTable" msprop:Generator_TableVarName="tablepageTag" msprop:Generator_RowChangedName="pageTagRowChanged" msprop:Generator_TablePropName="pageTag" msprop:Generator_RowDeletingName="pageTagRowDeleting" msprop:Generator_RowChangingName="pageTagRowChanging" msprop:Generator_RowEvHandlerName="pageTagRowChangeEventHandler" msprop:Generator_RowDeletedName="pageTagRowDeleted" msprop:Generator_RowClassName="pageTagRow" msprop:Generator_UserTableName="pageTag" msprop:Generator_RowEvArgName="pageTagRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="pageNum" msprop:Generator_ColumnVarNameInTable="columnpageNum" msprop:Generator_ColumnPropNameInRow="pageNum" msprop:Generator_ColumnPropNameInTable="pageNumColumn" msprop:Generator_UserColumnName="pageNum" type="xs:int" />
@@ -329,7 +329,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Tag" msprop:Generator_TableClassName="TagDataTable" msprop:Generator_TableVarName="tableTag" msprop:Generator_TablePropName="Tag" msprop:Generator_RowDeletingName="TagRowDeleting" msprop:Generator_RowChangingName="TagRowChanging" msprop:Generator_RowEvHandlerName="TagRowChangeEventHandler" msprop:Generator_RowDeletedName="TagRowDeleted" msprop:Generator_UserTableName="Tag" msprop:Generator_RowChangedName="TagRowChanged" msprop:Generator_RowEvArgName="TagRowChangeEvent" msprop:Generator_RowClassName="TagRow">
+        <xs:element name="Tag" msprop:Generator_TableClassName="TagDataTable" msprop:Generator_TableVarName="tableTag" msprop:Generator_RowChangedName="TagRowChanged" msprop:Generator_TablePropName="Tag" msprop:Generator_RowDeletingName="TagRowDeleting" msprop:Generator_RowChangingName="TagRowChanging" msprop:Generator_RowEvHandlerName="TagRowChangeEventHandler" msprop:Generator_RowDeletedName="TagRowDeleted" msprop:Generator_RowClassName="TagRow" msprop:Generator_UserTableName="Tag" msprop:Generator_RowEvArgName="TagRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="tagNum" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columntagNum" msprop:Generator_ColumnPropNameInRow="tagNum" msprop:Generator_ColumnPropNameInTable="tagNumColumn" msprop:Generator_UserColumnName="tagNum" type="xs:int" />
@@ -370,10 +370,10 @@
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="ImagepageImage" msdata:parent="Image" msdata:child="pageImage" msdata:parentkey="imageNum" msdata:childkey="imageNum" msprop:Generator_UserChildTable="pageImage" msprop:Generator_ChildPropName="GetpageImageRows" msprop:Generator_UserRelationName="ImagepageImage" msprop:Generator_ParentPropName="ImageRow" msprop:Generator_RelationVarName="relationImagepageImage" msprop:Generator_UserParentTable="Image" />
-      <msdata:Relationship name="PagepageImage" msdata:parent="Page" msdata:child="pageImage" msdata:parentkey="pageNum" msdata:childkey="pageNum" msprop:Generator_UserChildTable="pageImage" msprop:Generator_ChildPropName="GetpageImageRows" msprop:Generator_UserRelationName="PagepageImage" msprop:Generator_ParentPropName="PageRow" msprop:Generator_RelationVarName="relationPagepageImage" msprop:Generator_UserParentTable="Page" />
-      <msdata:Relationship name="PagepageTag" msdata:parent="Page" msdata:child="pageTag" msdata:parentkey="pageNum" msdata:childkey="pageNum" msprop:Generator_UserChildTable="pageTag" msprop:Generator_ChildPropName="GetpageTagRows" msprop:Generator_UserRelationName="PagepageTag" msprop:Generator_ParentPropName="PageRow" msprop:Generator_RelationVarName="relationPagepageTag" msprop:Generator_UserParentTable="Page" />
-      <msdata:Relationship name="TagpageTag" msdata:parent="Tag" msdata:child="pageTag" msdata:parentkey="tagNum" msdata:childkey="tagNum" msprop:Generator_UserChildTable="pageTag" msprop:Generator_ChildPropName="GetpageTagRows" msprop:Generator_UserRelationName="TagpageTag" msprop:Generator_RelationVarName="relationTagpageTag" msprop:Generator_UserParentTable="Tag" msprop:Generator_ParentPropName="TagRow" />
+      <msdata:Relationship name="ImagepageImage" msdata:parent="Image" msdata:child="pageImage" msdata:parentkey="imageNum" msdata:childkey="imageNum" msprop:Generator_UserChildTable="pageImage" msprop:Generator_ChildPropName="GetpageImageRows" msprop:Generator_UserRelationName="ImagepageImage" msprop:Generator_RelationVarName="relationImagepageImage" msprop:Generator_UserParentTable="Image" msprop:Generator_ParentPropName="ImageRow" />
+      <msdata:Relationship name="PagepageImage" msdata:parent="Page" msdata:child="pageImage" msdata:parentkey="pageNum" msdata:childkey="pageNum" msprop:Generator_UserChildTable="pageImage" msprop:Generator_ChildPropName="GetpageImageRows" msprop:Generator_UserRelationName="PagepageImage" msprop:Generator_RelationVarName="relationPagepageImage" msprop:Generator_UserParentTable="Page" msprop:Generator_ParentPropName="PageRow" />
+      <msdata:Relationship name="PagepageTag" msdata:parent="Page" msdata:child="pageTag" msdata:parentkey="pageNum" msdata:childkey="pageNum" msprop:Generator_UserChildTable="pageTag" msprop:Generator_ChildPropName="GetpageTagRows" msprop:Generator_UserRelationName="PagepageTag" msprop:Generator_RelationVarName="relationPagepageTag" msprop:Generator_UserParentTable="Page" msprop:Generator_ParentPropName="PageRow" />
+      <msdata:Relationship name="TagpageTag" msdata:parent="Tag" msdata:child="pageTag" msdata:parentkey="tagNum" msdata:childkey="tagNum" msprop:Generator_UserChildTable="pageTag" msprop:Generator_ChildPropName="GetpageTagRows" msprop:Generator_UserRelationName="TagpageTag" msprop:Generator_ParentPropName="TagRow" msprop:Generator_RelationVarName="relationTagpageTag" msprop:Generator_UserParentTable="Tag" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

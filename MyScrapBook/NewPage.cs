@@ -99,7 +99,8 @@ namespace MyScrapBook
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            tableAdapterManager.UpdateAll(databaseDataSet);
+            
+            
         }
 
         private void buttonTagAdd_Click(object sender, EventArgs e)
@@ -115,6 +116,7 @@ namespace MyScrapBook
             {
                 checkedListBoxTag.Items.Add(r["tagName"]);
             }
+            //it seems that insert works
         }
 
         private void comboBoxImage_SelectedIndexChanged(object sender, EventArgs e)
