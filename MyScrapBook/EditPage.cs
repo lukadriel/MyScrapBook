@@ -12,14 +12,16 @@ namespace MyScrapBook
 {
     public partial class EditPage : Form
     {
-        public EditPage()
+        public EditPage(DateTime date)
         {
             InitializeComponent();
         }
 
-        private void buttonExit_Click(object sender, EventArgs e)
+       
+
+        private void buttonSave_Click(object sender, EventArgs e)
         {
-            Form page = new MainPage();
+            Form page = new ViewPage();
             page.MdiParent = MdiParent;
             page.FormBorderStyle = FormBorderStyle.None;
             page.Dock = DockStyle.Fill;

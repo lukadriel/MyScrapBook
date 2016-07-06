@@ -53,6 +53,12 @@
     <Compile Include="ManageImage.Designer.cs">
       <DependentUpon>ManageImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManagePicture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagePicture.Designer.cs">
+      <DependentUpon>ManagePicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageTag.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </Compile>
     <EmbeddedResource Include="ManageImage.resx">
       <DependentUpon>ManageImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagePicture.resx">
+      <DependentUpon>ManagePicture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageTag.resx">
       <DependentUpon>ManageTag.cs</DependentUpon>

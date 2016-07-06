@@ -28,47 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.labelComment = new System.Windows.Forms.Label();
-            this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
+            this.groupBoxTag = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.listViewImage = new System.Windows.Forms.ListView();
+            this.labelComment = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(334, 13);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.ValueMember = "pageComment";
-            // 
-            // labelComment
-            // 
-            this.labelComment.AutoSize = true;
-            this.labelComment.Location = new System.Drawing.Point(628, 350);
-            this.labelComment.Name = "labelComment";
-            this.labelComment.Size = new System.Drawing.Size(34, 17);
-            this.labelComment.TabIndex = 1;
-            this.labelComment.Text = "void";
-            // 
-            // pictureBoxImage
-            // 
-            this.pictureBoxImage.Location = new System.Drawing.Point(461, 13);
-            this.pictureBoxImage.Name = "pictureBoxImage";
-            this.pictureBoxImage.Size = new System.Drawing.Size(381, 275);
-            this.pictureBoxImage.TabIndex = 2;
-            this.pictureBoxImage.TabStop = false;
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(3, 3);
+            this.buttonEdit.Location = new System.Drawing.Point(4, 3);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(104, 39);
+            this.buttonEdit.Size = new System.Drawing.Size(159, 105);
             this.buttonEdit.TabIndex = 3;
             this.buttonEdit.Text = "編集";
             this.buttonEdit.UseVisualStyleBackColor = true;
@@ -76,9 +52,10 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(3, 48);
+            this.buttonExit.Location = new System.Drawing.Point(4, 114);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(104, 39);
+            this.buttonExit.Size = new System.Drawing.Size(159, 113);
             this.buttonExit.TabIndex = 4;
             this.buttonExit.Text = "終了";
             this.buttonExit.UseVisualStyleBackColor = true;
@@ -88,37 +65,79 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.buttonEdit);
             this.flowLayoutPanel1.Controls.Add(this.buttonExit);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 119);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(136, 100);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(170, 664);
             this.flowLayoutPanel1.TabIndex = 7;
+            // 
+            // groupBoxTag
+            // 
+            this.groupBoxTag.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxTag.Location = new System.Drawing.Point(170, 0);
+            this.groupBoxTag.Name = "groupBoxTag";
+            this.groupBoxTag.Size = new System.Drawing.Size(1088, 100);
+            this.groupBoxTag.TabIndex = 8;
+            this.groupBoxTag.TabStop = false;
+            this.groupBoxTag.Text = "タグ";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.listViewImage);
+            this.flowLayoutPanel2.Controls.Add(this.labelComment);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(170, 106);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1088, 558);
+            this.flowLayoutPanel2.TabIndex = 9;
+            // 
+            // listViewImage
+            // 
+            this.listViewImage.Location = new System.Drawing.Point(3, 3);
+            this.listViewImage.Name = "listViewImage";
+            this.listViewImage.Size = new System.Drawing.Size(1085, 432);
+            this.listViewImage.TabIndex = 0;
+            this.listViewImage.UseCompatibleStateImageBehavior = false;
+            // 
+            // labelComment
+            // 
+            this.labelComment.AutoSize = true;
+            this.labelComment.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.labelComment.Location = new System.Drawing.Point(3, 438);
+            this.labelComment.Name = "labelComment";
+            this.labelComment.Size = new System.Drawing.Size(67, 24);
+            this.labelComment.TabIndex = 1;
+            this.labelComment.Text = "label1";
             // 
             // ViewPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 528);
+            this.ClientSize = new System.Drawing.Size(1258, 664);
+            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.groupBoxTag);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.pictureBoxImage);
-            this.Controls.Add(this.labelComment);
-            this.Controls.Add(this.comboBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ViewPage";
             this.Text = "ViewPage";
             this.Load += new System.EventHandler(this.ViewPage_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label labelComment;
-        private System.Windows.Forms.PictureBox pictureBoxImage;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBoxTag;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.ListView listViewImage;
+        private System.Windows.Forms.Label labelComment;
+        private System.Data.DataSet dtsDB;
+        private System.Data.OleDb.OleDbDataAdapter dtaDB;
     }
 }

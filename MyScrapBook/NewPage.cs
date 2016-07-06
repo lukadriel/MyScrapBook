@@ -108,22 +108,22 @@ namespace MyScrapBook
 
         private void buttonAddImage_Click(object sender, EventArgs e)
         {
-
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "画像ファイル|*.jpg;*.png;*.gif;*.bmp";
-            ofd.Multiselect = false;
-            if(ofd.ShowDialog()==DialogResult.OK)
-            {
-                new ManageImage(ofd, dtImage).ShowDialog();
-                try
-                {
-                    imageList.Images.Add(Image.FromFile(ofd.FileName));
-                    listView.Items.Add(ofd.SafeFileName, imageList.Images.Count - 1);
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+            new ManagePicture(dsDB, daImage).ShowDialog();
+            //OpenFileDialog ofd = new OpenFileDialog();
+            //ofd.Filter = "画像ファイル|*.jpg;*.png;*.gif;*.bmp";
+            //ofd.Multiselect = false;
+            //if(ofd.ShowDialog()==DialogResult.OK)
+            //{
+            //    new ManageImage(ofd, dtImage).ShowDialog();
+            //    try
+            //    {
+            //        imageList.Images.Add(Image.FromFile(ofd.FileName));
+            //        listView.Items.Add(ofd.SafeFileName, imageList.Images.Count - 1);
+            //    }
+            //    catch(Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
                 //string s = @"images\" + ofd.SafeFileName;
                 //try
                 //{
@@ -140,7 +140,7 @@ namespace MyScrapBook
                 //    MessageBox.Show(ex.Message);
                 //}
             }
-        }
+        
 
         private void buttonSave_Click(object sender, EventArgs e)
         {

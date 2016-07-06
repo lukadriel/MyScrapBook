@@ -35,15 +35,7 @@ namespace MyScrapBook
             newEntry.Show();
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
-        {
-            Form edit = new EditPage();
-            edit.MdiParent = MdiParent;
-            edit.FormBorderStyle = FormBorderStyle.None;
-            edit.Dock = DockStyle.Fill;
-            Close();
-            edit.Show();
-        }
+       
 
         private void buttonView_Click(object sender, EventArgs e)
         {
@@ -67,8 +59,7 @@ namespace MyScrapBook
             mainCalendar.UpdateBoldedDates();
             if(mainCalendar.BoldedDates.Contains(DateTime.Today))
             {
-                buttonView.Enabled = true;
-                buttonEdit.Enabled = true;
+                buttonView.Enabled = true;                
                 buttonNew.Enabled = false;
             }
         }
@@ -77,14 +68,12 @@ namespace MyScrapBook
         {
             if (mainCalendar.BoldedDates.Contains(mainCalendar.SelectionStart))
             {
-                buttonView.Enabled = true;
-                buttonEdit.Enabled = true;
+                buttonView.Enabled = true;                
                 buttonNew.Enabled = false;
             }
             else
             {
-                buttonView.Enabled = false;
-                buttonEdit.Enabled = false;
+                buttonView.Enabled = false;                
                 buttonNew.Enabled = true;
             }
         }
