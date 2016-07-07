@@ -139,5 +139,6 @@
         private System.Windows.Forms.Label labelComment;
         private System.Data.DataSet dtsDB;
         private System.Data.OleDb.OleDbDataAdapter dtaDB;
+        private System.DateTime date;
     }
 }

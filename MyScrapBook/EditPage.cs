@@ -15,13 +15,14 @@ namespace MyScrapBook
         public EditPage(DateTime date)
         {
             InitializeComponent();
+            this.date = date;
         }
 
        
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Form page = new ViewPage();
+            Form page = new ViewPage(dtsDB,dtaDB,date);
             page.MdiParent = MdiParent;
             page.FormBorderStyle = FormBorderStyle.None;
             page.Dock = DockStyle.Fill;

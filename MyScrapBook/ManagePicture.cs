@@ -34,8 +34,7 @@ namespace MyScrapBook
             imgCol = new DataGridViewImageColumn();
             imgCol.HeaderText = "画像";
             imgCol.Name = "image";
-            imgCol.ImageLayout = DataGridViewImageCellLayout.Stretch;
-            
+            imgCol.ImageLayout = DataGridViewImageCellLayout.Stretch;            
             dataGridView.Columns["imageName"].HeaderText = "画像名";
             dataGridView.Columns["imageComment"].HeaderText = "コメント";
             dataGridView.Columns["imageNum"].Visible = false;
@@ -43,7 +42,7 @@ namespace MyScrapBook
             imageGridView.Columns.Add(imgCol);
             dataGridView.Columns["imageComment"].ReadOnly = false;
             dataGridView.Columns["imageName"].ReadOnly = false;
-
+            
         }
 
        
@@ -76,6 +75,18 @@ namespace MyScrapBook
                 r.SetValues(Image.FromFile(ofd.FileName));
                 imageGridView.Rows.Add(r);
             }
+        }
+
+        
+        private void buttonDelImage_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count != 0)
+            {
+                imageGridView.Rows.RemoveAt(dataGridView.SelectedRows[0].Index);
+                dtsBckUp.Tables["Picture"].Rows.Remove(dtsBckUp.Tables["Picture"].Rows.Find(dataGridView.SelectedRows[0].Cells["imageNum"].Value));                
+            }
+            else
+                MessageBox.Show("No Rows Selected");           
         }
     }
 }

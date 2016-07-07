@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace MyScrapBook
 {
     public partial class ViewPage : Form
     {
-        public ViewPage()
+        public ViewPage(DataSet dtsDB,OleDbDataAdapter dAdView,DateTime viewDate)
         {
             InitializeComponent();
+            date = viewDate;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace MyScrapBook
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            Form edit = new EditPage();
+            Form edit = new EditPage(date);
             edit.MdiParent = MdiParent;
             edit.FormBorderStyle = FormBorderStyle.None;
             edit.Dock = DockStyle.Fill;
