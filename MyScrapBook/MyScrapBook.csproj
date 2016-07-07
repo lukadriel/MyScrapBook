@@ -169,6 +169,7 @@
     <Content Include="DatabaseScrap.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\" />
