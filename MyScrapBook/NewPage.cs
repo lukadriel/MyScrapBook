@@ -108,7 +108,7 @@ namespace MyScrapBook
 
         private void buttonAddImage_Click(object sender, EventArgs e)
         {
-            new ManagePicture(dsDB, daImage).ShowDialog();
+            new ManagePicture(dsDB, daImage,daPageImage,selectedDate).ShowDialog();
             //OpenFileDialog ofd = new OpenFileDialog();
             //ofd.Filter = "画像ファイル|*.jpg;*.png;*.gif;*.bmp";
             //ofd.Multiselect = false;

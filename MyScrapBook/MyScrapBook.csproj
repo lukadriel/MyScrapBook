@@ -47,12 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManageImage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ManageImage.Designer.cs">
-      <DependentUpon>ManageImage.cs</DependentUpon>
-    </Compile>
     <Compile Include="ManagePicture.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,9 +99,6 @@
     <Compile Include="ViewPage.Designer.cs">
       <DependentUpon>ViewPage.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ManageImage.resx">
-      <DependentUpon>ManageImage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManagePicture.resx">
       <DependentUpon>ManagePicture.cs</DependentUpon>
     </EmbeddedResource>

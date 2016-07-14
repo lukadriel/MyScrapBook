@@ -158,7 +158,6 @@
         private System.Windows.Forms.Button buttonAddImage;
         private System.Windows.Forms.DataGridView imageGridView;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.DateTime pageDate;
         private bool saved;
         private System.Windows.Forms.Button buttonDelImage;
     }

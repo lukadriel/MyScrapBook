@@ -1,1 +1,1 @@
-﻿-Add modifications to Database table pageImage to be able to load it in the view and edit pages
+﻿-Change the usage of the dataset to reference
