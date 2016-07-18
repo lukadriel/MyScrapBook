@@ -109,10 +109,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonView;
         private System.Windows.Forms.Button buttonNew;
-        private System.Data.OleDb.OleDbConnection objConn;
-        private System.Data.OleDb.OleDbDataAdapter daPage;
-        private System.Data.DataSet dsDB;
-        private string connexionString;
+       
     }
 }
 

@@ -13,6 +13,10 @@ namespace MyScrapBook
 {
     public partial class MainPage : Form
     {
+        private OleDbConnection objConn;
+        private OleDbDataAdapter daPage;
+        private DataSet dsDB;
+        private string connexionString;
         public MainPage()
         {
             InitializeComponent();
@@ -23,6 +27,7 @@ namespace MyScrapBook
             daPage = new OleDbDataAdapter("Select * from Page", objConn);
             daPage.FillSchema(dsDB, SchemaType.Source, "Page");
             daPage.Fill(dsDB, "Page");
+
         }
 
         private void buttonNew_Click(object sender, EventArgs e)
@@ -35,7 +40,7 @@ namespace MyScrapBook
             newEntry.Show();
         }
 
-       
+
 
         private void buttonView_Click(object sender, EventArgs e)
         {
@@ -59,7 +64,7 @@ namespace MyScrapBook
             mainCalendar.UpdateBoldedDates();
             if(mainCalendar.BoldedDates.Contains(DateTime.Today))
             {
-                buttonView.Enabled = true;                
+                buttonView.Enabled = true;
                 buttonNew.Enabled = false;
             }
         }
@@ -68,12 +73,12 @@ namespace MyScrapBook
         {
             if (mainCalendar.BoldedDates.Contains(mainCalendar.SelectionStart))
             {
-                buttonView.Enabled = true;                
+                buttonView.Enabled = true;
                 buttonNew.Enabled = false;
             }
             else
             {
-                buttonView.Enabled = false;                
+                buttonView.Enabled = false;
                 buttonNew.Enabled = true;
             }
         }
