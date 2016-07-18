@@ -14,12 +14,20 @@ namespace MyScrapBook
 {
     public partial class NewPage : Form
     {
+        private string sqlPicPage;
+        private OleDbDataAdapter adptPicPage;
+        private DataTable picPage;
         public NewPage(DateTime date)
         {
             InitializeComponent();
+            sqlPicPage = @"SELECT Picture.imageName, Picture.imagePath, Picture.imageComment
+                                FROM Picture INNER JOIN pageImage ON Picture.imageNum = pageImage.imageNum
+                                WHERE (((pageImage.imageNum)=[Picture].[imageNum]) AND ((pageImage.pageDate)=#" + date.ToShortDateString() + "#));";
             connexionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=DatabaseScrap.accdb";
             objConn = new OleDbConnection(connexionString);
             objConn.Open();
+            adptPicPage = new OleDbDataAdapter(sqlPicPage, objConn);
+            picPage = new DataTable();
             daTag = new OleDbDataAdapter("Select * from Tag", objConn);
             daImage = new OleDbDataAdapter("Select * from Picture", objConn);
             daPage = new OleDbDataAdapter("Select * from Page", objConn);
@@ -39,6 +47,11 @@ namespace MyScrapBook
             selectedDate = date;
             dtImage = dsDB.Tables["Picture"].Clone();
             rowPage = dsDB.Tables["Page"].NewRow();
+            DataRow row = dsDB.Tables["Page"].NewRow();
+            row["pageDate"] = selectedDate;
+            dsDB.Tables["Page"].Rows.Add(row);
+            OleDbCommandBuilder pageComBld = new OleDbCommandBuilder(daPage);
+            daPage.Update(dsDB, "Page");
         }
 
         private void pageTag_save()
@@ -55,15 +68,15 @@ namespace MyScrapBook
             }
         }
 
-        private void page_save()
+        /*private void page_save()
         {
             DataRow row = dsDB.Tables["Page"].NewRow();
             row[0] = selectedDate;
             row[1] = true;
             row[2] = textBoxPComment.Text;
             dsDB.Tables["Page"].Rows.Add(row);
-        }
-        private void pageImage_save()//pageImage save Problem
+        }*/
+        /*private void pageImage_save()//pageImage save Problem
         {
             foreach(DataRow r in dtImage.Rows)
             {
@@ -76,9 +89,9 @@ namespace MyScrapBook
                 }
                 dsDB.Tables["pageImage"].Rows.Add(row);
             }
-        }
+        }*/
 
-        private void image_save()
+        /*private void image_save()
         {
             foreach (DataRow r in dtImage.Rows)
             {
@@ -88,7 +101,7 @@ namespace MyScrapBook
                 row[3] = r[3];
                 dsDB.Tables["Picture"].Rows.Add(row);
             }
-        }
+        }*/
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
@@ -109,44 +122,35 @@ namespace MyScrapBook
         private void buttonAddImage_Click(object sender, EventArgs e)
         {
             new ManagePicture(dsDB, daImage,daPageImage,selectedDate).ShowDialog();
-            //OpenFileDialog ofd = new OpenFileDialog();
-            //ofd.Filter = "画像ファイル|*.jpg;*.png;*.gif;*.bmp";
-            //ofd.Multiselect = false;
-            //if(ofd.ShowDialog()==DialogResult.OK)
-            //{
-            //    new ManageImage(ofd, dtImage).ShowDialog();
-            //    try
-            //    {
-            //        imageList.Images.Add(Image.FromFile(ofd.FileName));
-            //        listView.Items.Add(ofd.SafeFileName, imageList.Images.Count - 1);
-            //    }
-            //    catch(Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //    }
-                //string s = @"images\" + ofd.SafeFileName;
-                //try
-                //{
-                //    //File.Copy(ofd.FileName, s); //to be added later
-                //    rowImage = dtImage.NewRow();
-                //    rowImage["imagePath"] = s;
-                //    rowImage["imageName"] = ofd.SafeFileName;
-                //    imageList.Images.Add(Image.FromFile(ofd.FileName));
-                //    listView.Items.Add(ofd.SafeFileName, imageList.Images.Count - 1);
-
-                //}
-                //catch(Exception ex)
-                //{
-                //    MessageBox.Show(ex.Message);
-                //}
+            dsDB.Tables["Picture"].Clear();
+            dsDB.Tables["pageImage"].Clear();
+            dsDB.Tables["Page"].Clear();
+            daImage.Fill(dsDB, "Picture");
+            daPageImage.Fill(dsDB, "pageImage");
+            daPage.Fill(dsDB, "Page");
+            adptPicPage.FillSchema(picPage, SchemaType.Source);
+            adptPicPage.Fill(picPage);
+            int j = 0;
+            foreach (DataRow r in picPage.Rows)
+            {
+                imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
+                ListViewItem item = new ListViewItem();
+                item.ImageIndex = j;
+                item.Text = r["imageComment"].ToString();
+                item.ToolTipText = r["imageName"].ToString();
+                listView.Items.Add(item);
+                j++;
             }
-        
+            listView.View = View.LargeIcon;
+
+        }
+
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            page_save();
-            image_save();
-            pageImage_save();
+            //page_save();
+            //image_save();
+            //pageImage_save();
             pageTag_save();
             OleDbCommandBuilder pageComBld = new OleDbCommandBuilder(daPage);
             OleDbCommandBuilder imageComBld = new OleDbCommandBuilder(daImage);
@@ -175,7 +179,7 @@ namespace MyScrapBook
 
         private void textBoxPComment_TextChanged(object sender, EventArgs e)
         {
-            rowPage["pageComment"] = textBoxPComment.Text;
+            dsDB.Tables["Page"].Rows.Find(selectedDate)["pageComment"] = textBoxPComment.Text;
         }
 
 

@@ -69,7 +69,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(136, 590);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(136, 673);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // flowLayoutPanel2
@@ -77,10 +77,10 @@
             this.flowLayoutPanel2.Controls.Add(this.listViewImage);
             this.flowLayoutPanel2.Controls.Add(this.labelComment);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(136, 94);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(136, 177);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(870, 496);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1126, 496);
             this.flowLayoutPanel2.TabIndex = 9;
             // 
             // listViewImage
@@ -89,7 +89,7 @@
             this.listViewImage.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.listViewImage.Name = "listViewImage";
             this.listViewImage.ShowItemToolTips = true;
-            this.listViewImage.Size = new System.Drawing.Size(869, 384);
+            this.listViewImage.Size = new System.Drawing.Size(1113, 415);
             this.listViewImage.TabIndex = 0;
             this.listViewImage.UseCompatibleStateImageBehavior = false;
             // 
@@ -97,7 +97,7 @@
             // 
             this.labelComment.AutoSize = true;
             this.labelComment.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.labelComment.Location = new System.Drawing.Point(2, 390);
+            this.labelComment.Location = new System.Drawing.Point(2, 421);
             this.labelComment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelComment.Name = "labelComment";
             this.labelComment.Size = new System.Drawing.Size(57, 20);
@@ -107,7 +107,7 @@
             // imageList
             // 
             this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imageList.ImageSize = new System.Drawing.Size(250, 250);
+            this.imageList.ImageSize = new System.Drawing.Size(220, 200);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // flowLayoutPanelTag
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 590);
+            this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.labelLayoutTag);
             this.Controls.Add(this.flowLayoutPanelTag);
             this.Controls.Add(this.flowLayoutPanel2);

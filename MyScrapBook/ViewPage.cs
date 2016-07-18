@@ -15,10 +15,12 @@ namespace MyScrapBook
     {
         private string sqlPicture;
         private string sqlTag;
+        private string sqlPage;
         private string connexion;
         private DataSet dsDB;
         private OleDbDataAdapter adptPic;
         private OleDbDataAdapter adptTag;
+        private OleDbDataAdapter adptPage;
         private OleDbConnection objConn;
         public ViewPage(DataSet dtsDB,OleDbDataAdapter dAdView,DateTime viewDate)
         {
@@ -30,16 +32,22 @@ namespace MyScrapBook
             sqlTag = @"SELECT Tag.tagName
                           FROM Tag INNER JOIN pageTag ON Tag.tagNum = pageTag.tagNum
                           WHERE (((pageTag.pageDate)=#" + viewDate.ToShortDateString() + "#));";
+            sqlPage = @"SELECT Page.pageComment, Page.pageDate
+                            FROM Page
+                            WHERE (((Page.pageDate)=#" + viewDate.ToShortDateString() + "#));";
             date = viewDate;
             connexion= "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=DatabaseScrap.accdb";
             objConn = new OleDbConnection(connexion);
             objConn.Open();
             adptPic = new OleDbDataAdapter(sqlPicture, objConn);
             adptTag = new OleDbDataAdapter(sqlTag, objConn);
+            adptPage = new OleDbDataAdapter(sqlPage, objConn);
             adptTag.Fill(dsDB);
             dsDB.Tables[0].TableName = "Tag";
             adptPic.Fill(dsDB);
             dsDB.Tables[1].TableName = "Picture";
+            adptPage.Fill(dsDB);
+            dsDB.Tables[2].TableName = "Page";
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -77,19 +85,13 @@ namespace MyScrapBook
             }
             listViewImage.View = View.LargeIcon;
             listViewImage.LargeImageList = imageList;
-            /*for(int i=0;i<imageList.Images.Count;i++)
-            {
-                ListViewItem item = new ListViewItem();
-                item.ImageIndex = i;
-                item.Text = i.ToString();
-                listViewImage.Items.Add(item);
-            }*/
             foreach (DataRow r in dsDB.Tables[0].Rows)
             {
                 Label text = new Label();
                 text.Text = r[0].ToString();
                 flowLayoutPanelTag.Controls.Add(text);
             }
+            labelComment.Text = dsDB.Tables[2].Rows[0][0].ToString();
 
         }
     }

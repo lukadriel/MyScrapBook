@@ -1,1 +1,2 @@
-﻿-Change the usage of the dataset to reference
+﻿- change database management to  be able to save all images added
+-complete edit mode
