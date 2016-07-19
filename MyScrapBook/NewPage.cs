@@ -121,28 +121,30 @@ namespace MyScrapBook
 
         private void buttonAddImage_Click(object sender, EventArgs e)
         {
-            new ManagePicture(dsDB, daImage,daPageImage,selectedDate).ShowDialog();
-            dsDB.Tables["Picture"].Clear();
-            dsDB.Tables["pageImage"].Clear();
-            dsDB.Tables["Page"].Clear();
-            daImage.Fill(dsDB, "Picture");
-            daPageImage.Fill(dsDB, "pageImage");
-            daPage.Fill(dsDB, "Page");
-            adptPicPage.FillSchema(picPage, SchemaType.Source);
-            adptPicPage.Fill(picPage);
-            int j = 0;
-            foreach (DataRow r in picPage.Rows)
+            if(new ManagePicture(dsDB, daImage,daPageImage,selectedDate).ShowDialog()==DialogResult.OK)
             {
-                imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
-                ListViewItem item = new ListViewItem();
-                item.ImageIndex = j;
-                item.Text = r["imageComment"].ToString();
-                item.ToolTipText = r["imageName"].ToString();
-                listView.Items.Add(item);
-                j++;
+                //dsDB.Tables["Picture"].Clear();
+                dsDB.Tables["pageImage"].Clear();
+                dsDB.Tables["Page"].Clear();
+                daImage.Fill(dsDB, "Picture");
+                daPageImage.Fill(dsDB, "pageImage");
+                daPage.Fill(dsDB, "Page");
+                adptPicPage.FillSchema(picPage, SchemaType.Source);
+                adptPicPage.Fill(picPage);
+                int j = 0;
+                foreach (DataRow r in picPage.Rows)
+                {
+                    imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
+                    ListViewItem item = new ListViewItem();
+                    item.ImageIndex = j;
+                    item.Text = r["imageComment"].ToString();
+                    item.ToolTipText = r["imageName"].ToString();
+                    listView.Items.Add(item);
+                    j++;
+                }
+                listView.View = View.LargeIcon;
+                listView.Update();
             }
-            listView.View = View.LargeIcon;
-
         }
 
 
@@ -168,9 +170,21 @@ namespace MyScrapBook
             {
                 dsDB.Tables["Tag"].Clear();
                 daTag.Fill(dsDB, "Tag");
+                List<Object> checkedItem = new List<object>();
+                foreach (object check in checkedListBoxTag.CheckedItems)
+                    checkedItem.Add(check);
                 checkedListBoxTag.Items.Clear();
                 foreach (DataRow r in dsDB.Tables[0].Rows)
                     checkedListBoxTag.Items.Add(r["tagName"]);
+                foreach(object item in checkedItem)
+                {
+                    for(int i = 0; i<checkedListBoxTag.Items.Count;i++)
+                    {
+                        if (checkedListBoxTag.Items[i].ToString() == item.ToString())
+                            checkedListBoxTag.SetItemChecked(i, true);
+
+                    }
+                }
             }
 
         }
@@ -191,13 +205,7 @@ namespace MyScrapBook
 
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach(DataRow r in dtImage.Rows)
-            {
-                if(r["imageName"].ToString()==listView.SelectedItems[0].ToString())
-                {
-                    labelCommentImage.Text = r["commentImage"].ToString();
-                }
-            }
+
         }
     }
 }

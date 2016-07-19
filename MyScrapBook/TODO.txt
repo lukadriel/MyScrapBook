@@ -1,2 +1,5 @@
-﻿- change database management to  be able to save all images added
--complete edit mode
+﻿- edit mode started
+	added listview, image manager and tag manager
+	need to complete images shown
+
+- still database loading problems, will check on the release

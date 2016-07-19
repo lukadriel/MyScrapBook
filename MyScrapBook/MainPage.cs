@@ -44,7 +44,7 @@ namespace MyScrapBook
 
         private void buttonView_Click(object sender, EventArgs e)
         {
-            Form view = new ViewPage(dsDB, daPage, mainCalendar.SelectionStart);
+            Form view = new ViewPage(dsDB, mainCalendar.SelectionStart);
             view.MdiParent = MdiParent;
             view.FormBorderStyle = FormBorderStyle.None;
             view.Dock = DockStyle.Fill;

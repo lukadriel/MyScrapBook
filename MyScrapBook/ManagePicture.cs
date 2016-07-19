@@ -104,7 +104,7 @@ namespace MyScrapBook
                         row[0] = selectedDate;
                         row[1] = r["imageNum"];
                         dtsBckUp.Tables["pageImage"].Rows.Add(row);
-                        break;
+                        //break;
                     }
                 }
             }
@@ -126,6 +126,7 @@ namespace MyScrapBook
             //dtaPageImage.Update(dtsDb, "pageImage");
             DialogResult = DialogResult.OK;
             saved = true;
+            conn.Close();
             Close();
         }
 

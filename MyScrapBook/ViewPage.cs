@@ -22,7 +22,7 @@ namespace MyScrapBook
         private OleDbDataAdapter adptTag;
         private OleDbDataAdapter adptPage;
         private OleDbConnection objConn;
-        public ViewPage(DataSet dtsDB,OleDbDataAdapter dAdView,DateTime viewDate)
+        public ViewPage(DataSet dtsDB,DateTime viewDate)
         {
             InitializeComponent();
             dsDB = new DataSet();

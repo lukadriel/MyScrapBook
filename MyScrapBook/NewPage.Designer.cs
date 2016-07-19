@@ -38,7 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.listView = new System.Windows.Forms.ListView();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.labelCommentImage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonAddImage
@@ -117,6 +116,7 @@
             this.listView.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.listView.MultiSelect = false;
             this.listView.Name = "listView";
+            this.listView.ShowItemToolTips = true;
             this.listView.Size = new System.Drawing.Size(522, 399);
             this.listView.TabIndex = 10;
             this.listView.UseCompatibleStateImageBehavior = false;
@@ -128,21 +128,11 @@
             this.imageList.ImageSize = new System.Drawing.Size(100, 100);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // labelCommentImage
-            // 
-            this.labelCommentImage.AutoSize = true;
-            this.labelCommentImage.Location = new System.Drawing.Point(474, 417);
-            this.labelCommentImage.Name = "labelCommentImage";
-            this.labelCommentImage.Size = new System.Drawing.Size(76, 17);
-            this.labelCommentImage.TabIndex = 11;
-            this.labelCommentImage.Text = "labelImage";
-            // 
             // NewPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 590);
-            this.Controls.Add(this.labelCommentImage);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkedListBoxTag);
@@ -194,6 +184,5 @@
         private System.Data.OleDb.OleDbDataAdapter daPageImage;
         private System.DateTime selectedDate;
         private System.Data.DataSet dsDB;
-        private System.Windows.Forms.Label labelCommentImage;
     }
 }
