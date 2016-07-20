@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.buttonAddImage = new System.Windows.Forms.Button();
+            this.buttonManageImage = new System.Windows.Forms.Button();
             this.buttonTagManage = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
@@ -38,17 +38,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.listView = new System.Windows.Forms.ListView();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.buttonAddImage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // buttonAddImage
+            // buttonManageImage
             // 
-            this.buttonAddImage.Location = new System.Drawing.Point(12, 12);
-            this.buttonAddImage.Name = "buttonAddImage";
-            this.buttonAddImage.Size = new System.Drawing.Size(133, 80);
-            this.buttonAddImage.TabIndex = 1;
-            this.buttonAddImage.Text = "画像追加";
-            this.buttonAddImage.UseVisualStyleBackColor = true;
-            this.buttonAddImage.Click += new System.EventHandler(this.buttonAddImage_Click);
+            this.buttonManageImage.Location = new System.Drawing.Point(12, 12);
+            this.buttonManageImage.Name = "buttonManageImage";
+            this.buttonManageImage.Size = new System.Drawing.Size(133, 80);
+            this.buttonManageImage.TabIndex = 1;
+            this.buttonManageImage.Text = "画像管理";
+            this.buttonManageImage.UseVisualStyleBackColor = true;
+            this.buttonManageImage.Click += new System.EventHandler(this.buttonManageImage_Click);
             // 
             // buttonTagManage
             // 
@@ -92,10 +93,11 @@
             // 
             // checkedListBoxTag
             // 
+            this.checkedListBoxTag.CheckOnClick = true;
             this.checkedListBoxTag.FormattingEnabled = true;
             this.checkedListBoxTag.Location = new System.Drawing.Point(217, 98);
             this.checkedListBoxTag.Name = "checkedListBoxTag";
-            this.checkedListBoxTag.Size = new System.Drawing.Size(159, 72);
+            this.checkedListBoxTag.Size = new System.Drawing.Size(159, 174);
             this.checkedListBoxTag.Sorted = true;
             this.checkedListBoxTag.TabIndex = 8;
             this.checkedListBoxTag.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxTag_SelectedIndexChanged);
@@ -128,11 +130,21 @@
             this.imageList.ImageSize = new System.Drawing.Size(100, 100);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // buttonAddImage
+            // 
+            this.buttonAddImage.Location = new System.Drawing.Point(474, 417);
+            this.buttonAddImage.Name = "buttonAddImage";
+            this.buttonAddImage.Size = new System.Drawing.Size(121, 36);
+            this.buttonAddImage.TabIndex = 11;
+            this.buttonAddImage.Text = "画像追加";
+            this.buttonAddImage.UseVisualStyleBackColor = true;
+            // 
             // NewPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 590);
+            this.Controls.Add(this.buttonAddImage);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkedListBoxTag);
@@ -140,7 +152,7 @@
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonTagManage);
-            this.Controls.Add(this.buttonAddImage);
+            this.Controls.Add(this.buttonManageImage);
             this.Name = "NewPage";
             this.Text = "NewPage";
             this.Load += new System.EventHandler(this.NewPage_Load);
@@ -155,7 +167,7 @@
         {
 
         }
-        private System.Windows.Forms.Button buttonAddImage;
+        private System.Windows.Forms.Button buttonManageImage;
         private System.Windows.Forms.Button buttonTagManage;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonExit;
@@ -184,5 +196,6 @@
         private System.Data.OleDb.OleDbDataAdapter daPageImage;
         private System.DateTime selectedDate;
         private System.Data.DataSet dsDB;
+        private System.Windows.Forms.Button buttonAddImage;
     }
 }

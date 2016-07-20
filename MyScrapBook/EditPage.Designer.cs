@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonTagManage = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.checkedListBoxTag = new System.Windows.Forms.CheckedListBox();
@@ -35,8 +36,11 @@
             this.buttonImgManage = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView = new System.Windows.Forms.ListView();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.buttonAddImage = new System.Windows.Forms.Button();
+            this.buttonDeleteImage = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -44,9 +48,9 @@
             // buttonTagManage
             // 
             this.buttonTagManage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonTagManage.Location = new System.Drawing.Point(0, 513);
+            this.buttonTagManage.Location = new System.Drawing.Point(0, 581);
             this.buttonTagManage.Name = "buttonTagManage";
-            this.buttonTagManage.Size = new System.Drawing.Size(278, 80);
+            this.buttonTagManage.Size = new System.Drawing.Size(278, 44);
             this.buttonTagManage.TabIndex = 2;
             this.buttonTagManage.Text = "タグ管理";
             this.buttonTagManage.UseVisualStyleBackColor = true;
@@ -55,9 +59,9 @@
             // buttonSave
             // 
             this.buttonSave.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonSave.Location = new System.Drawing.Point(0, 593);
+            this.buttonSave.Location = new System.Drawing.Point(0, 625);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(278, 80);
+            this.buttonSave.Size = new System.Drawing.Size(278, 48);
             this.buttonSave.TabIndex = 3;
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -74,6 +78,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.buttonDeleteImage);
+            this.panel2.Controls.Add(this.buttonAddImage);
             this.panel2.Controls.Add(this.buttonImgManage);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.buttonTagManage);
@@ -88,9 +94,9 @@
             // buttonImgManage
             // 
             this.buttonImgManage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonImgManage.Location = new System.Drawing.Point(0, 429);
+            this.buttonImgManage.Location = new System.Drawing.Point(0, 530);
             this.buttonImgManage.Name = "buttonImgManage";
-            this.buttonImgManage.Size = new System.Drawing.Size(278, 84);
+            this.buttonImgManage.Size = new System.Drawing.Size(278, 51);
             this.buttonImgManage.TabIndex = 10;
             this.buttonImgManage.Text = "画像管理";
             this.buttonImgManage.UseVisualStyleBackColor = true;
@@ -120,21 +126,47 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "タグ";
             // 
-            // listView1
+            // listView
             // 
-            this.listView1.Location = new System.Drawing.Point(528, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(722, 537);
-            this.listView1.TabIndex = 11;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView.Location = new System.Drawing.Point(468, 12);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(782, 537);
+            this.listView.TabIndex = 11;
+            this.listView.UseCompatibleStateImageBehavior = false;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(528, 555);
+            this.textBox1.Location = new System.Drawing.Point(468, 555);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(722, 75);
+            this.textBox1.Size = new System.Drawing.Size(782, 75);
             this.textBox1.TabIndex = 12;
+            // 
+            // imageList
+            // 
+            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList.ImageSize = new System.Drawing.Size(220, 200);
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // buttonAddImage
+            // 
+            this.buttonAddImage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonAddImage.Location = new System.Drawing.Point(0, 483);
+            this.buttonAddImage.Name = "buttonAddImage";
+            this.buttonAddImage.Size = new System.Drawing.Size(278, 47);
+            this.buttonAddImage.TabIndex = 11;
+            this.buttonAddImage.Text = "画像追加";
+            this.buttonAddImage.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteImage
+            // 
+            this.buttonDeleteImage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonDeleteImage.Location = new System.Drawing.Point(0, 437);
+            this.buttonDeleteImage.Name = "buttonDeleteImage";
+            this.buttonDeleteImage.Size = new System.Drawing.Size(278, 46);
+            this.buttonDeleteImage.TabIndex = 12;
+            this.buttonDeleteImage.Text = "画像削除";
+            this.buttonDeleteImage.UseVisualStyleBackColor = true;
             // 
             // EditPage
             // 
@@ -142,7 +174,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listView);
             this.Controls.Add(this.panel2);
             this.Name = "EditPage";
             this.Text = "EditPage";
@@ -163,7 +195,10 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonImgManage;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ImageList imageList;
+        private System.Windows.Forms.Button buttonAddImage;
+        private System.Windows.Forms.Button buttonDeleteImage;
     }
 }

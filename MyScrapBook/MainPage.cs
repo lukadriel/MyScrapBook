@@ -15,6 +15,8 @@ namespace MyScrapBook
     {
         private OleDbConnection objConn;
         private OleDbDataAdapter daPage;
+        private OleDbDataAdapter daTag;
+        private OleDbDataAdapter daPicture;
         private DataSet dsDB;
         private string connexionString;
         public MainPage()
@@ -25,8 +27,14 @@ namespace MyScrapBook
             objConn.Open();
             dsDB = new DataSet();
             daPage = new OleDbDataAdapter("Select * from Page", objConn);
+            daPicture = new OleDbDataAdapter("Select * From Picture", objConn);
+            daTag = new OleDbDataAdapter("Select * From Tag", objConn);
             daPage.FillSchema(dsDB, SchemaType.Source, "Page");
             daPage.Fill(dsDB, "Page");
+            daTag.FillSchema(dsDB, SchemaType.Source, "Tag");
+            daTag.Fill(dsDB, "Tag");
+            daPicture.FillSchema(dsDB, SchemaType.Source, "Picture");
+            daPicture.Fill(dsDB, "Picture");
 
         }
 
@@ -81,6 +89,16 @@ namespace MyScrapBook
                 buttonView.Enabled = false;
                 buttonNew.Enabled = true;
             }
+        }
+
+        private void buttonTagManage_Click(object sender, EventArgs e)
+        {
+            new ManageTag(dsDB, daTag).ShowDialog();
+        }
+
+        private void buttonManageImage_Click(object sender, EventArgs e)
+        {
+            new ManagePicture(dsDB, daPicture);
         }
     }
 }

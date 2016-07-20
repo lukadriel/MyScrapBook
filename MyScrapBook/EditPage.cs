@@ -78,6 +78,8 @@ namespace MyScrapBook
         private void EditPage_Load(object sender, EventArgs e)
         {
             load_Tag();
+            load_Picture();
+            textBox1.Text = dtsDb.Tables["Page"].Rows[0]["pageComment"].ToString();
         }
 
         private void load_Tag()
@@ -94,7 +96,19 @@ namespace MyScrapBook
         }
         private void load_Picture()
         {
-
+            int j = 0;
+            foreach(DataRow r in picture.Rows)
+            {
+                imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
+                ListViewItem item = new ListViewItem();
+                item.ImageIndex = j;
+                item.Text = r["imageComment"].ToString();
+                item.ToolTipText = r["imageName"].ToString();
+                listView.Items.Add(item);
+                j++;
+            }
+            listView.View = View.LargeIcon;
+            listView.LargeImageList = imageList;
         }
 
         private void buttonTagManage_Click(object sender, EventArgs e)
@@ -107,7 +121,7 @@ namespace MyScrapBook
                 foreach (object check in checkedListBoxTag.CheckedItems)
                     checkedItem.Add(check);
                 checkedListBoxTag.Items.Clear();
-                foreach (DataRow r in dtsDb.Tables[0].Rows)
+                foreach (DataRow r in dtsDb.Tables["Tag"].Rows)
                     checkedListBoxTag.Items.Add(r["tagName"]);
                 foreach (object item in checkedItem)
                 {
@@ -123,7 +137,7 @@ namespace MyScrapBook
 
         private void buttonImgManage_Click(object sender, EventArgs e)
         {
-            new ManagePicture(dtsDb, daPicture, daPageImage, date).ShowDialog();
+            new ManagePicture(dtsDb, daPicture).ShowDialog();
         }
     }
 }

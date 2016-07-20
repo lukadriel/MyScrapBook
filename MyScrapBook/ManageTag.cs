@@ -19,7 +19,7 @@ namespace MyScrapBook
             this.daTag = daTag;
             this.dtsDb = dsDB;
             dataGridViewTag.AutoGenerateColumns = true;
-            dataGridViewTag.DataSource = dsDB;
+            dataGridViewTag.DataSource = dtsDb;
             dataGridViewTag.DataMember = "Tag";
         }
 
@@ -35,6 +35,7 @@ namespace MyScrapBook
         {
             OleDbCommandBuilder objcombld = new OleDbCommandBuilder(daTag);
             daTag.Update(dtsDb, "Tag");
+            System.Threading.Thread.Sleep(100);
             this.DialogResult = DialogResult.OK;
             Close();
 

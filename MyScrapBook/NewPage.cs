@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
-using System.IO;
+using System.Threading;
 
 namespace MyScrapBook
 {
@@ -119,32 +119,10 @@ namespace MyScrapBook
                 checkedListBoxTag.Items.Add(r["tagName"]);
         }
 
-        private void buttonAddImage_Click(object sender, EventArgs e)
+        private void buttonManageImage_Click(object sender, EventArgs e)
         {
-            if(new ManagePicture(dsDB, daImage,daPageImage,selectedDate).ShowDialog()==DialogResult.OK)
-            {
-                //dsDB.Tables["Picture"].Clear();
-                dsDB.Tables["pageImage"].Clear();
-                dsDB.Tables["Page"].Clear();
-                daImage.Fill(dsDB, "Picture");
-                daPageImage.Fill(dsDB, "pageImage");
-                daPage.Fill(dsDB, "Page");
-                adptPicPage.FillSchema(picPage, SchemaType.Source);
-                adptPicPage.Fill(picPage);
-                int j = 0;
-                foreach (DataRow r in picPage.Rows)
-                {
-                    imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
-                    ListViewItem item = new ListViewItem();
-                    item.ImageIndex = j;
-                    item.Text = r["imageComment"].ToString();
-                    item.ToolTipText = r["imageName"].ToString();
-                    listView.Items.Add(item);
-                    j++;
-                }
-                listView.View = View.LargeIcon;
-                listView.Update();
-            }
+            Thread.Sleep(500);
+            new ManagePicture(dsDB, daImage).ShowDialog();
         }
 
 
@@ -166,6 +144,7 @@ namespace MyScrapBook
 
         private void buttonTagManage_Click(object sender, EventArgs e)
         {
+            Thread.Sleep(100);
             if(new ManageTag(dsDB,daTag).ShowDialog()==DialogResult.OK)
             {
                 dsDB.Tables["Tag"].Clear();

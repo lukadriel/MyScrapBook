@@ -14,41 +14,20 @@ namespace MyScrapBook
 {
     public partial class ManagePicture : Form
     {
-        private DateTime selectedDate;
-        private OleDbDataAdapter dtaPageImage;
-        private DataTable dtPageImage;
-        private List<string> picPath;
-        private OleDbDataAdapter dtapagePicture;
-        private DataSet dtsTest;
-        private DataSet dtsDb;
-        private DataSet dtsBckUp;
-        private OleDbDataAdapter dtaPicture;
-        private OleDbDataAdapter dtaPage;
-        private string connexion;
-        private OleDbConnection conn;
 
-        public ManagePicture(DataSet dsDB,OleDbDataAdapter daPicture,OleDbDataAdapter daPageImage,DateTime date)
+        private DataSet dtsDB;
+        private OleDbDataAdapter daPicture;
+        List<string> picPath;
+
+        public ManagePicture(DataSet dsDB,OleDbDataAdapter daPicture)
         {
             InitializeComponent();
             myEvents();
-            dtsDb = dsDB;
-            dtsBckUp = new DataSet("Backup");
-            //dtsBckUp= dsDB.Copy();
-            dtsTest = new DataSet("Database");
-            //dtaPicture = daPicture;
-            dtapagePicture = daPicture;
-            //dtaPageImage = daPageImage;
-            dtapagePicture.SelectCommand.CommandText = @"SELECT Picture.imageNum, Picture.imagePath, Picture.imageName, Picture.imageComment
-                FROM Picture INNER JOIN pageImage ON Picture.imageNum = pageImage.imageNum
-                WHERE(((pageImage.pageDate) =#"+date.ToShortDateString()+"#));";
-            dtapagePicture.FillSchema(dtsTest, SchemaType.Source, "Picture");
-            dtapagePicture.Fill(dtsTest, "Picture");
-            dataGridView.DataSource = dtsTest;//dtsBckUp;
+            this.daPicture = daPicture;
+            dtsDB = dsDB;
             dataGridView.AutoGenerateColumns = true;
+            dataGridView.DataSource = dtsDB;
             dataGridView.DataMember = "Picture";
-            selectedDate = date;
-            //dtPageImage = dtsDb.Tables["Picture"].Clone();
-            saved = false;
             picPath = new List<string>();
         }
 
@@ -78,55 +57,12 @@ namespace MyScrapBook
             }
         }
 
-        private void update_pageImage()
-        {
-            connexion= "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=DatabaseScrap.accdb";
-            conn = new OleDbConnection(connexion);
-            conn.Open();
-            dtaPageImage = new OleDbDataAdapter("Select * from pageImage", conn);
-            dtaPicture = new OleDbDataAdapter("Select * from Picture", conn);
-            dtaPage = new OleDbDataAdapter("Select * from Page", conn);
-            //dtaPage.FillSchema(dtsBckUp, SchemaType.Source, "Page");
-            dtaPageImage.FillSchema(dtsBckUp, SchemaType.Source, "pageImage");
-            dtaPicture.FillSchema(dtsBckUp, SchemaType.Source, "Picture");
-            dtaPicture.Fill(dtsBckUp,"Picture");
-            dtaPageImage.Fill(dtsBckUp, "pageImage");
-            //dtaPage.Fill(dtsBckUp, "Page");
-            //DataRow ro = dtsBckUp.Tables["Page"].NewRow();
-
-            foreach(string path in picPath)
-            {
-                foreach(DataRow r in dtsBckUp.Tables["Picture"].Rows)
-                {
-                    if(r["imagePath"].ToString()==path)
-                    {
-                        DataRow row = dtsBckUp.Tables["pageImage"].NewRow();
-                        row[0] = selectedDate;
-                        row[1] = r["imageNum"];
-                        dtsBckUp.Tables["pageImage"].Rows.Add(row);
-                        //break;
-                    }
-                }
-            }
-            OleDbCommandBuilder objCmdBldPagImg = new OleDbCommandBuilder(dtaPageImage);
-            OleDbCommandBuilder objCmdBldPag = new OleDbCommandBuilder(dtaPage);
-            dtaPageImage.Update(dtsBckUp, "pageImage");
-        }
-
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            //dtsDb = dtsBckUp.Copy();
-            OleDbCommandBuilder objCmdBldPic = new OleDbCommandBuilder(dtaPicture);
-            //OleDbCommandBuilder objCmdBldPag = new OleDbCommandBuilder(dtaPageImage);
-            //dtaPicture.Update(dtsDb,"Picture");
-            OleDbCommandBuilder objCmdBldPag = new OleDbCommandBuilder(dtapagePicture);
-            dtapagePicture.Update(dtsTest, "Picture");
-            update_pageImage();
-            //update_pageImage();
-            //dtaPageImage.Update(dtsDb, "pageImage");
-            DialogResult = DialogResult.OK;
-            saved = true;
-            conn.Close();
+            OleDbCommandBuilder objComBld = new OleDbCommandBuilder(daPicture);
+            daPicture.Update(dtsDB, "Picture");
+            System.Threading.Thread.Sleep(100);
+            this.DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -140,13 +76,13 @@ namespace MyScrapBook
                 string s;
                 if (checkBoxCopy.Checked)
                 {
-                    s = @"images\" + ofd.SafeFileName;
-                    File.Copy(ofd.FileName, s,true);
-                    DataRow row = dtsTest.Tables["Picture"].NewRow();//dtsBckUp.Tables["Picture"].NewRow();
-                    row["imagePath"] = s;
+                    s = @"image\" + ofd.SafeFileName;
+                    File.Copy(ofd.FileName, s);
+                    DataRow row = dtsDB.Tables["Picture"].NewRow();
                     row["imageName"] = ofd.SafeFileName;
+                    row["imagePath"] = s;
+                    dtsDB.Tables["Picture"].Rows.Add(row);
                     DataGridViewRow r = new DataGridViewRow();
-                    dtsTest.Tables["Picture"].Rows.Add(row);//dtsBckUp.Tables["Picture"].Rows.Add(row);
                     r.CreateCells(imageGridView);
                     r.Height = 100;
                     r.SetValues(Image.FromFile(ofd.FileName));
@@ -155,11 +91,11 @@ namespace MyScrapBook
                 else
                 {
                     s = ofd.FileName;
-                    DataRow row = dtsTest.Tables["Picture"].NewRow();//dtsBckUp.Tables["Picture"].NewRow();
-                    row["imagePath"] = s;
+                    DataRow row = dtsDB.Tables["Picture"].NewRow();
                     row["imageName"] = ofd.SafeFileName;
+                    row["imagePath"] = s;
+                    dtsDB.Tables["Picture"].Rows.Add(row);
                     DataGridViewRow r = new DataGridViewRow();
-                    dtsTest.Tables["Picture"].Rows.Add(row);//dtsBckUp.Tables["Picture"].Rows.Add(row);
                     r.CreateCells(imageGridView);
                     r.Height = 100;
                     r.SetValues(Image.FromFile(ofd.FileName));
@@ -175,9 +111,8 @@ namespace MyScrapBook
             if (dataGridView.SelectedRows.Count != 0)
             {
                 imageGridView.Rows.RemoveAt(dataGridView.SelectedRows[0].Index);
-                object[] keys = new object[2] {selectedDate,dataGridView.SelectedRows[0].Cells["imageNum"].Value };
                 picPath.Remove(dataGridView.SelectedRows[0].Cells["imagePath"].Value.ToString());
-                dtsTest.Tables["Picture"].Rows.Remove(dtsTest.Tables["Picture"].Rows.Find(keys[1]));//dtsBckUp.Tables["Picture"].Rows.Remove(dtsBckUp.Tables["Picture"].Rows.Find(keys[1]));
+                dtsDB.Tables["Picture"].Rows[dataGridView.SelectedRows[0].Index].Delete();
             }
             else
                 MessageBox.Show("No Rows Selected");
