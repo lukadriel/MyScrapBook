@@ -98,7 +98,7 @@ namespace MyScrapBook
 
         private void buttonManageImage_Click(object sender, EventArgs e)
         {
-            new ManagePicture(dsDB, daPicture);
+            new ManagePicture(dsDB, daPicture).ShowDialog();
         }
     }
 }

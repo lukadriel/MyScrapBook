@@ -122,7 +122,10 @@ namespace MyScrapBook
         private void buttonManageImage_Click(object sender, EventArgs e)
         {
             Thread.Sleep(500);
-            new ManagePicture(dsDB, daImage).ShowDialog();
+            if(new ManagePicture(dsDB, daImage).ShowDialog()==DialogResult.OK)
+            {
+                daImage.Fill(dsDB, "Picture");
+            }
         }
 
 
@@ -185,6 +188,11 @@ namespace MyScrapBook
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonAddImage_Click(object sender, EventArgs e)
+        {
+            new PictureChoice(dsDB, daImage, daPageImage, selectedDate).ShowDialog();
         }
     }
 }

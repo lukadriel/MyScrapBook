@@ -78,8 +78,8 @@ namespace MyScrapBook
                 imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
                 ListViewItem item = new ListViewItem();
                 item.ImageIndex = j;
-                item.Text = r["imageComment"].ToString();
-                item.ToolTipText = r["imageName"].ToString();
+                item.Text = r["imageName"].ToString();
+                item.ToolTipText = r["imageComment"].ToString();
                 listViewImage.Items.Add(item);
                 j++;
             }
