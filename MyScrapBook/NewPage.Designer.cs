@@ -39,6 +39,7 @@
             this.listView = new System.Windows.Forms.ListView();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.buttonAddImage = new System.Windows.Forms.Button();
+            this.buttonDeleteImage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonManageImage
@@ -133,8 +134,8 @@
             // 
             // imageList
             // 
-            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList.ImageSize = new System.Drawing.Size(100, 100);
+            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList.ImageSize = new System.Drawing.Size(250, 250);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // buttonAddImage
@@ -142,17 +143,28 @@
             this.buttonAddImage.Location = new System.Drawing.Point(592, 469);
             this.buttonAddImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonAddImage.Name = "buttonAddImage";
-            this.buttonAddImage.Size = new System.Drawing.Size(151, 40);
+            this.buttonAddImage.Size = new System.Drawing.Size(150, 40);
             this.buttonAddImage.TabIndex = 11;
             this.buttonAddImage.Text = "画像追加";
             this.buttonAddImage.UseVisualStyleBackColor = true;
             this.buttonAddImage.Click += new System.EventHandler(this.buttonAddImage_Click);
+            // 
+            // buttonDeleteImage
+            // 
+            this.buttonDeleteImage.Location = new System.Drawing.Point(790, 470);
+            this.buttonDeleteImage.Name = "buttonDeleteImage";
+            this.buttonDeleteImage.Size = new System.Drawing.Size(150, 40);
+            this.buttonDeleteImage.TabIndex = 12;
+            this.buttonDeleteImage.Text = "画像削除";
+            this.buttonDeleteImage.UseVisualStyleBackColor = true;
+            this.buttonDeleteImage.Click += new System.EventHandler(this.buttonDeleteImage_Click);
             // 
             // NewPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1258, 664);
+            this.Controls.Add(this.buttonDeleteImage);
             this.Controls.Add(this.buttonAddImage);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.label1);
@@ -207,5 +219,6 @@
         private System.DateTime selectedDate;
         private System.Data.DataSet dsDB;
         private System.Windows.Forms.Button buttonAddImage;
+        private System.Windows.Forms.Button buttonDeleteImage;
     }
 }

@@ -3,3 +3,11 @@
 	need to complete images shown
 
 - still database loading problems, will check on the release
+
+
+
+
+
+brouillon
+
+(((pageImage.imageNum)=[Picture].[imageNum]) AND

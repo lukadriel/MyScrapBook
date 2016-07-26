@@ -115,7 +115,7 @@ namespace MyScrapBook
                 dtsDB.Tables["Picture"].Rows[dataGridView.SelectedRows[0].Index].Delete();
             }
             else
-                MessageBox.Show("No Rows Selected");
+                MessageBox.Show("削除する行を選んでください。");
         }
 
         private void dataGridViewScroll(object sender, EventArgs e)

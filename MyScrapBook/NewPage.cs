@@ -20,9 +20,9 @@ namespace MyScrapBook
         public NewPage(DateTime date)
         {
             InitializeComponent();
-            sqlPicPage = @"SELECT Picture.imageName, Picture.imagePath, Picture.imageComment
+            sqlPicPage = @"SELECT Picture.imageNum,Picture.imageName, Picture.imagePath, Picture.imageComment
                                 FROM Picture INNER JOIN pageImage ON Picture.imageNum = pageImage.imageNum
-                                WHERE (((pageImage.imageNum)=[Picture].[imageNum]) AND ((pageImage.pageDate)=#" + date.ToShortDateString() + "#));";
+                                WHERE  ((pageImage.pageDate)=#" + date.ToShortDateString() + "#);";
             connexionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=DatabaseScrap.accdb";
             objConn = new OleDbConnection(connexionString);
             objConn.Open();
@@ -168,7 +168,6 @@ namespace MyScrapBook
                     }
                 }
             }
-
         }
 
 
@@ -193,6 +192,49 @@ namespace MyScrapBook
         private void buttonAddImage_Click(object sender, EventArgs e)
         {
             new PictureChoice(dsDB, daImage, daPageImage, selectedDate).ShowDialog();
+            update_listview();
+        }
+
+        private void buttonDeleteImage_Click(object sender, EventArgs e)
+        {
+            if(listView.SelectedItems.Count==0)
+            {
+                MessageBox.Show("削除する写真を選択してください。");
+            }
+            else
+            {
+                foreach(ListViewItem item in listView.SelectedItems)
+                {
+                    object[] key = { selectedDate, item.Tag };
+                    dsDB.Tables["pageImage"].Rows.Remove(dsDB.Tables["pageImage"].Rows.Find(key));
+                }
+                OleDbCommandBuilder pageImageComBld = new OleDbCommandBuilder(daPageImage);
+                daPageImage.Update(dsDB, "pageImage");
+                update_listview();
+            }
+        }
+        private void update_listview()
+        {
+            Thread.Sleep(50);
+            listView.Items.Clear();
+            picPage.Clear();
+            daPageImage.Fill(dsDB, "pageImage");
+            adptPicPage.Fill(picPage);
+            int j = 0;
+            foreach (DataRow r in picPage.Rows)
+            {
+                imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
+                ListViewItem item = new ListViewItem();
+                item.ImageIndex = j;
+                item.Text = r["imageName"].ToString();
+                item.ToolTipText = r["imageComment"].ToString();
+                item.Tag = r["imageNum"];
+                listView.Items.Add(item);
+                j++;
+            }
+            listView.View = View.LargeIcon;
+            listView.LargeImageList = imageList;
+            listView.Update();
         }
     }
 }

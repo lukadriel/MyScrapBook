@@ -51,7 +51,7 @@ namespace MyScrapBook
         {
             if(listView.SelectedItems.Count==0)
             {
-                MessageBox.Show("No items selected");
+                MessageBox.Show("追加する画像は選択されていません。");
             }
             else
             {
