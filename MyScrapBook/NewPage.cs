@@ -169,26 +169,18 @@ namespace MyScrapBook
                 }
             }
         }
-
-
-
         private void textBoxPComment_TextChanged(object sender, EventArgs e)
         {
             dsDB.Tables["Page"].Rows.Find(selectedDate)["pageComment"] = textBoxPComment.Text;
         }
-
-
-
         private void checkedListBoxTag_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
         private void buttonAddImage_Click(object sender, EventArgs e)
         {
             new PictureChoice(dsDB, daImage, daPageImage, selectedDate).ShowDialog();
@@ -207,10 +199,11 @@ namespace MyScrapBook
                 {
                     object[] key = { selectedDate, item.Tag };
                     dsDB.Tables["pageImage"].Rows.Remove(dsDB.Tables["pageImage"].Rows.Find(key));
+                    listView.Items.Remove(item);
                 }
                 OleDbCommandBuilder pageImageComBld = new OleDbCommandBuilder(daPageImage);
                 daPageImage.Update(dsDB, "pageImage");
-                update_listview();
+                listView.Update();
             }
         }
         private void update_listview()

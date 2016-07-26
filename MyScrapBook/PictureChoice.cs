@@ -24,7 +24,7 @@ namespace MyScrapBook
             this.daPageImage = daPageImage;
             dtsDB = dsDB;
             selectedDate = date;
-            
+
         }
 
         private void PictureChoice_Load(object sender, EventArgs e)
@@ -32,14 +32,18 @@ namespace MyScrapBook
             int j = 0;
             foreach(DataRow r in dtsDB.Tables["Picture"].Rows)
             {
-                imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
-                ListViewItem item = new ListViewItem();
-                item.ImageIndex = j;
-                item.Text = r["imageName"].ToString();
-                item.ToolTipText = r["imageComment"].ToString();
-                item.Tag = r["imageNum"];
-                listView.Items.Add(item);
-                j++;
+                object[] keys = { selectedDate, r["imageNum"] };
+                if(!dtsDB.Tables["pageImage"].Rows.Contains(keys))
+                {
+                    imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
+                    ListViewItem item = new ListViewItem();
+                    item.ImageIndex = j;
+                    item.Text = r["imageName"].ToString();
+                    item.ToolTipText = r["imageComment"].ToString();
+                    item.Tag = r["imageNum"];
+                    listView.Items.Add(item);
+                    j++;
+                }
             }
             listView.View = View.Tile;
             listView.SmallImageList = imageList;
@@ -65,6 +69,7 @@ namespace MyScrapBook
             }
             OleDbCommandBuilder cmdBld = new OleDbCommandBuilder(daPageImage);
             daPageImage.Update(dtsDB, "pageImage");
+            Close();
         }
     }
 }
