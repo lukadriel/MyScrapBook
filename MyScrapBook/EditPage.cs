@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Threading;
 
 namespace MyScrapBook
 {
@@ -26,6 +27,8 @@ namespace MyScrapBook
         private System.DateTime date;
         private DataTable tag;
         private DataTable picture;
+
+
         public EditPage(DateTime date)
         {
             InitializeComponent();
@@ -104,6 +107,7 @@ namespace MyScrapBook
                 item.ImageIndex = j;
                 item.Text = r["imageComment"].ToString();
                 item.ToolTipText = r["imageName"].ToString();
+                item.Tag = r["imageNum"];
                 listView.Items.Add(item);
                 j++;
             }
@@ -138,6 +142,36 @@ namespace MyScrapBook
         private void buttonImgManage_Click(object sender, EventArgs e)
         {
             new ManagePicture(dtsDb, daPicture).ShowDialog();
+        }
+
+        private void buttonAddImage_Click(object sender, EventArgs e)
+        {
+            new PictureChoice(dtsDb, daPicture, daPageImage, date).ShowDialog();
+            update_listview();
+        }
+
+        private void update_listview()
+        {
+            Thread.Sleep(50);
+            listView.Items.Clear();
+            picture.Clear();
+            daPageImage.Fill(dtsDb, "pageImage");
+            daImage.Fill(picture);
+            int j = 0;
+            foreach (DataRow r in picture.Rows)
+            {
+                imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
+                ListViewItem item = new ListViewItem();
+                item.ImageIndex = j;
+                item.Text = r["imageName"].ToString();
+                item.ToolTipText = r["imageComment"].ToString();
+                item.Tag = r["imageNum"];
+                listView.Items.Add(item);
+                j++;
+            }
+            listView.View = View.LargeIcon;
+            listView.LargeImageList = imageList;
+            listView.Update();
         }
     }
 }
