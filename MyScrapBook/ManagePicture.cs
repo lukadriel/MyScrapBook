@@ -70,38 +70,54 @@ namespace MyScrapBook
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "画像ファイル|*.jpg;*.png;*.gif;*.bmp";
-            ofd.Multiselect = false;
+            ofd.Multiselect = true;
+            string[] filenames;
+            string[] safefilenames;
             if(ofd.ShowDialog()==DialogResult.OK)
             {
                 string s;
+                filenames = ofd.FileNames;
+                safefilenames = ofd.SafeFileNames;
+                int ind = filenames.Length;
+
                 if (checkBoxCopy.Checked)
                 {
-                    s = @"image\" + ofd.SafeFileName;
-                    File.Copy(ofd.FileName, s);
-                    DataRow row = dtsDB.Tables["Picture"].NewRow();
-                    row["imageName"] = ofd.SafeFileName;
-                    row["imagePath"] = s;
-                    dtsDB.Tables["Picture"].Rows.Add(row);
-                    DataGridViewRow r = new DataGridViewRow();
-                    r.CreateCells(imageGridView);
-                    r.Height = 100;
-                    r.SetValues(Image.FromFile(ofd.FileName));
-                    imageGridView.Rows.Add(r);
+                    for (int i = 0; i < ind; i++)
+                    {
+                        s = @"image\" + safefilenames[i];
+                        File.Copy(filenames[i], s);
+                        DataRow row = dtsDB.Tables["Picture"].NewRow();
+                        row["imageName"] = safefilenames[i];
+                        row["imagePath"] = s;
+                        dtsDB.Tables["Picture"].Rows.Add(row);
+                        DataGridViewRow r = new DataGridViewRow();
+                        r.CreateCells(imageGridView);
+                        r.Height = 100;
+                        r.SetValues(Image.FromFile(filenames[i]));
+                        imageGridView.Rows.Add(r);
+                        picPath.Add(s);
+                    }
+
                 }
                 else
                 {
-                    s = ofd.FileName;
-                    DataRow row = dtsDB.Tables["Picture"].NewRow();
-                    row["imageName"] = ofd.SafeFileName;
-                    row["imagePath"] = s;
-                    dtsDB.Tables["Picture"].Rows.Add(row);
-                    DataGridViewRow r = new DataGridViewRow();
-                    r.CreateCells(imageGridView);
-                    r.Height = 100;
-                    r.SetValues(Image.FromFile(ofd.FileName));
-                    imageGridView.Rows.Add(r);
+                    for (int i = 0; i < ind; i++)
+                    {
+                        s = filenames[i];
+                        DataRow row = dtsDB.Tables["Picture"].NewRow();
+                        row["imageName"] = safefilenames[i];
+                        row["imagePath"] = s;
+                        dtsDB.Tables["Picture"].Rows.Add(row);
+                        DataGridViewRow r = new DataGridViewRow();
+                        r.CreateCells(imageGridView);
+                        r.Height = 100;
+                        r.SetValues(Image.FromFile(filenames[i]));
+                        imageGridView.Rows.Add(r);
+                        picPath.Add(s);
+                    }
+
                 }
-                picPath.Add(s);
+
             }
         }
 

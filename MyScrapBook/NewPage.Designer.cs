@@ -33,7 +33,7 @@
             this.buttonTagManage = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
-            this.textBoxPComment = new System.Windows.Forms.TextBox();
+            this.textBoxComment = new System.Windows.Forms.TextBox();
             this.checkedListBoxTag = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listView = new System.Windows.Forms.ListView();
@@ -41,140 +41,131 @@
             this.buttonAddImage = new System.Windows.Forms.Button();
             this.buttonDeleteImage = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
+            //
             // buttonManageImage
-            // 
-            this.buttonManageImage.Location = new System.Drawing.Point(15, 14);
-            this.buttonManageImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            //
+            this.buttonManageImage.Location = new System.Drawing.Point(12, 12);
             this.buttonManageImage.Name = "buttonManageImage";
-            this.buttonManageImage.Size = new System.Drawing.Size(166, 90);
+            this.buttonManageImage.Size = new System.Drawing.Size(133, 80);
             this.buttonManageImage.TabIndex = 1;
             this.buttonManageImage.Text = "画像管理";
             this.buttonManageImage.UseVisualStyleBackColor = true;
             this.buttonManageImage.Click += new System.EventHandler(this.buttonManageImage_Click);
-            // 
+            //
             // buttonTagManage
-            // 
-            this.buttonTagManage.Location = new System.Drawing.Point(15, 110);
-            this.buttonTagManage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            //
+            this.buttonTagManage.Location = new System.Drawing.Point(12, 98);
             this.buttonTagManage.Name = "buttonTagManage";
-            this.buttonTagManage.Size = new System.Drawing.Size(166, 90);
+            this.buttonTagManage.Size = new System.Drawing.Size(133, 80);
             this.buttonTagManage.TabIndex = 2;
             this.buttonTagManage.Text = "タグ管理";
             this.buttonTagManage.UseVisualStyleBackColor = true;
             this.buttonTagManage.Click += new System.EventHandler(this.buttonTagManage_Click);
-            // 
+            //
             // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(15, 323);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            //
+            this.buttonSave.Location = new System.Drawing.Point(12, 287);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(166, 90);
+            this.buttonSave.Size = new System.Drawing.Size(133, 80);
             this.buttonSave.TabIndex = 3;
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
+            //
             // buttonExit
-            // 
-            this.buttonExit.Location = new System.Drawing.Point(15, 420);
-            this.buttonExit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            //
+            this.buttonExit.Location = new System.Drawing.Point(12, 373);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(166, 90);
+            this.buttonExit.Size = new System.Drawing.Size(133, 80);
             this.buttonExit.TabIndex = 5;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
-            // textBoxPComment
-            // 
-            this.textBoxPComment.Location = new System.Drawing.Point(739, 569);
-            this.textBoxPComment.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBoxPComment.Multiline = true;
-            this.textBoxPComment.Name = "textBoxPComment";
-            this.textBoxPComment.Size = new System.Drawing.Size(506, 83);
-            this.textBoxPComment.TabIndex = 7;
-            this.textBoxPComment.Text = "<<No Comment>>";
-            this.textBoxPComment.TextChanged += new System.EventHandler(this.textBoxPComment_TextChanged);
-            // 
+            //
+            // textBoxComment
+            //
+            this.textBoxComment.Location = new System.Drawing.Point(591, 506);
+            this.textBoxComment.Multiline = true;
+            this.textBoxComment.Name = "textBoxComment";
+            this.textBoxComment.Size = new System.Drawing.Size(406, 74);
+            this.textBoxComment.TabIndex = 7;
+            this.textBoxComment.Text = "<<No Comment>>";
+
+            //
             // checkedListBoxTag
-            // 
+            //
             this.checkedListBoxTag.CheckOnClick = true;
             this.checkedListBoxTag.FormattingEnabled = true;
-            this.checkedListBoxTag.Location = new System.Drawing.Point(271, 110);
-            this.checkedListBoxTag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.checkedListBoxTag.Location = new System.Drawing.Point(217, 98);
             this.checkedListBoxTag.Name = "checkedListBoxTag";
-            this.checkedListBoxTag.Size = new System.Drawing.Size(198, 184);
+            this.checkedListBoxTag.Size = new System.Drawing.Size(159, 157);
             this.checkedListBoxTag.Sorted = true;
             this.checkedListBoxTag.TabIndex = 8;
-            this.checkedListBoxTag.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxTag_SelectedIndexChanged);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(271, 83);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(217, 74);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 18);
+            this.label1.Size = new System.Drawing.Size(57, 17);
             this.label1.TabIndex = 9;
             this.label1.Text = "タグ選択";
-            // 
+            //
             // listView
-            // 
+            //
             this.listView.LargeImageList = this.imageList;
-            this.listView.Location = new System.Drawing.Point(592, 12);
+            this.listView.Location = new System.Drawing.Point(474, 11);
             this.listView.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.listView.MultiSelect = false;
             this.listView.Name = "listView";
             this.listView.ShowItemToolTips = true;
-            this.listView.Size = new System.Drawing.Size(652, 448);
+            this.listView.Size = new System.Drawing.Size(522, 399);
             this.listView.TabIndex = 10;
             this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
-            // 
+
+            //
             // imageList
-            // 
+            //
             this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.imageList.ImageSize = new System.Drawing.Size(250, 250);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
+            //
             // buttonAddImage
-            // 
-            this.buttonAddImage.Location = new System.Drawing.Point(592, 469);
-            this.buttonAddImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            //
+            this.buttonAddImage.Location = new System.Drawing.Point(474, 417);
             this.buttonAddImage.Name = "buttonAddImage";
-            this.buttonAddImage.Size = new System.Drawing.Size(150, 40);
+            this.buttonAddImage.Size = new System.Drawing.Size(120, 36);
             this.buttonAddImage.TabIndex = 11;
             this.buttonAddImage.Text = "画像追加";
             this.buttonAddImage.UseVisualStyleBackColor = true;
             this.buttonAddImage.Click += new System.EventHandler(this.buttonAddImage_Click);
-            // 
+            //
             // buttonDeleteImage
-            // 
-            this.buttonDeleteImage.Location = new System.Drawing.Point(790, 470);
+            //
+            this.buttonDeleteImage.Location = new System.Drawing.Point(632, 418);
+            this.buttonDeleteImage.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonDeleteImage.Name = "buttonDeleteImage";
-            this.buttonDeleteImage.Size = new System.Drawing.Size(150, 40);
+            this.buttonDeleteImage.Size = new System.Drawing.Size(120, 36);
             this.buttonDeleteImage.TabIndex = 12;
             this.buttonDeleteImage.Text = "画像削除";
             this.buttonDeleteImage.UseVisualStyleBackColor = true;
             this.buttonDeleteImage.Click += new System.EventHandler(this.buttonDeleteImage_Click);
-            // 
+            //
             // NewPage
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            //
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1258, 664);
+            this.ClientSize = new System.Drawing.Size(1006, 590);
             this.Controls.Add(this.buttonDeleteImage);
             this.Controls.Add(this.buttonAddImage);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkedListBoxTag);
-            this.Controls.Add(this.textBoxPComment);
+            this.Controls.Add(this.textBoxComment);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonTagManage);
             this.Controls.Add(this.buttonManageImage);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "NewPage";
             this.Text = "NewPage";
             this.Load += new System.EventHandler(this.NewPage_Load);
@@ -187,17 +178,21 @@
 
         private void myEventInit()
         {
-
+            this.checkedListBoxTag.LostFocus += CheckedListBoxTag_LostFocus;
+            this.textBoxComment.LostFocus += TextBoxComment_LostFocus;
         }
+
+
+
         private System.Windows.Forms.Button buttonManageImage;
         private System.Windows.Forms.Button buttonTagManage;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonExit;
-        private System.Windows.Forms.TextBox textBoxPComment;
+        private System.Windows.Forms.TextBox textBoxComment;
         private System.Windows.Forms.CheckedListBox checkedListBoxTag;
         private System.Windows.Forms.Label label1;
         private System.Data.DataRow rowImage;
-        private System.Data.DataRow rowPage;
+        
         private System.Data.DataRow rowTag;
         private System.Data.DataRow rowPageTag;
         private System.Data.DataRow rowPageImage;

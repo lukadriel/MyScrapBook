@@ -17,12 +17,24 @@ namespace MyScrapBook
         private string sqlPicPage;
         private OleDbDataAdapter adptPicPage;
         private DataTable picPage;
+        bool saved;
+        OleDbCommandBuilder pageComBld;
         public NewPage(DateTime date)
         {
             InitializeComponent();
+            myEventInit();
+            selectedDate = date;
+            load_data();
+            DataRow row = dsDB.Tables["Page"].NewRow();
+            pageComBld = new OleDbCommandBuilder(daPage);
+            saved = false;
+        }
+
+        private void load_data()
+        {
             sqlPicPage = @"SELECT Picture.imageNum,Picture.imageName, Picture.imagePath, Picture.imageComment
                                 FROM Picture INNER JOIN pageImage ON Picture.imageNum = pageImage.imageNum
-                                WHERE  ((pageImage.pageDate)=#" + date.ToShortDateString() + "#);";
+                                WHERE  ((pageImage.pageDate)=#" + selectedDate.ToShortDateString() + "#);";
             connexionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=DatabaseScrap.accdb";
             objConn = new OleDbConnection(connexionString);
             objConn.Open();
@@ -44,73 +56,50 @@ namespace MyScrapBook
             daPage.Fill(dsDB, "Page");
             daPageImage.Fill(dsDB, "pageImage");
             daPageTag.Fill(dsDB, "pageTag");
-            selectedDate = date;
-            dtImage = dsDB.Tables["Picture"].Clone();
-            rowPage = dsDB.Tables["Page"].NewRow();
-            DataRow row = dsDB.Tables["Page"].NewRow();
-            row["pageDate"] = selectedDate;
-            dsDB.Tables["Page"].Rows.Add(row);
-            OleDbCommandBuilder pageComBld = new OleDbCommandBuilder(daPage);
-            daPage.Update(dsDB, "Page");
         }
-
         private void pageTag_save()
         {
+            object[] keys = new object[2];
             foreach(DataRow r in dsDB.Tables["Tag"].Rows)
             {
-                if(checkedListBoxTag.CheckedItems.Contains(r["tagName"]))
+                DataRow row = dsDB.Tables["pageTag"].NewRow();
+                keys[0] = row[0] = selectedDate;
+                keys[1] = row[1] = r[0];
+                if ((checkedListBoxTag.CheckedItems.Contains(r["tagName"])) && !dsDB.Tables["pageTag"].Rows.Contains(keys))
                 {
-                    DataRow row = dsDB.Tables["pageTag"].NewRow();
-                    row[0] = selectedDate;
-                    row[1] = r[0];
                     dsDB.Tables["pageTag"].Rows.Add(row);
                 }
-            }
-        }
-
-        /*private void page_save()
-        {
-            DataRow row = dsDB.Tables["Page"].NewRow();
-            row[0] = selectedDate;
-            row[1] = true;
-            row[2] = textBoxPComment.Text;
-            dsDB.Tables["Page"].Rows.Add(row);
-        }*/
-        /*private void pageImage_save()//pageImage save Problem
-        {
-            foreach(DataRow r in dtImage.Rows)
-            {
-                DataRow row = dsDB.Tables["pageImage"].NewRow();
-                row[0] = selectedDate;
-                foreach(DataRow rw in dsDB.Tables["Picture"].Rows)
+                if (!(checkedListBoxTag.CheckedItems.Contains(r["tagName"])) && dsDB.Tables["pageTag"].Rows.Contains(keys))
                 {
-                    if(r["imagePath"]== rw["imagePath"])
-                        row[1] = rw[0];
+                    dsDB.Tables["pageTag"].Rows.Find(keys).Delete();
                 }
-                dsDB.Tables["pageImage"].Rows.Add(row);
             }
-        }*/
 
-        /*private void image_save()
-        {
-            foreach (DataRow r in dtImage.Rows)
-            {
-                DataRow row = dsDB.Tables["Picture"].NewRow();
-                row[1] = r[1];
-                row[2] = r[2];
-                row[3] = r[3];
-                dsDB.Tables["Picture"].Rows.Add(row);
-            }
-        }*/
+        }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            if(!saved)
+            {
+                dsDB.Tables["Page"].Rows.Find(selectedDate.ToShortDateString()).Delete();
+                try
+                {
+                    daPage.Update(dsDB, "Page");
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message + " : " + ex.ToString());
+                }
+            }
+            daPage.Update(dsDB, "Page");
+            Thread.Sleep(500);
             Form page = new MainPage();
             page.MdiParent = MdiParent;
             page.FormBorderStyle = FormBorderStyle.None;
             page.Dock = DockStyle.Fill;
             page.Show();
             Close();
+
         }
 
         private void NewPage_Load(object sender, EventArgs e)
@@ -127,22 +116,17 @@ namespace MyScrapBook
                 daImage.Fill(dsDB, "Picture");
             }
         }
-
+        private void CheckedListBoxTag_LostFocus(object sender, System.EventArgs e)
+        {
+            pageTag_save();
+            OleDbCommandBuilder pageTagComBld = new OleDbCommandBuilder(daPageTag);
+            daPageTag.Update(dsDB, "pageTag");
+        }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            //page_save();
-            //image_save();
-            //pageImage_save();
-            pageTag_save();
-            OleDbCommandBuilder pageComBld = new OleDbCommandBuilder(daPage);
-            OleDbCommandBuilder imageComBld = new OleDbCommandBuilder(daImage);
-            OleDbCommandBuilder pageTagComBld = new OleDbCommandBuilder(daPageTag);
-            OleDbCommandBuilder pageImageComBld = new OleDbCommandBuilder(daPageImage);
-            daImage.Update(dsDB, "Picture");
-            daPage.Update(dsDB, "Page");
-            //daPageImage.Update(dsDB, "pageImage");
-            daPageTag.Update(dsDB, "pageTag");
+            saved = true;
+
         }
 
         private void buttonTagManage_Click(object sender, EventArgs e)
@@ -169,18 +153,6 @@ namespace MyScrapBook
                 }
             }
         }
-        private void textBoxPComment_TextChanged(object sender, EventArgs e)
-        {
-            dsDB.Tables["Page"].Rows.Find(selectedDate)["pageComment"] = textBoxPComment.Text;
-        }
-        private void checkedListBoxTag_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void listView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         private void buttonAddImage_Click(object sender, EventArgs e)
         {
             new PictureChoice(dsDB, daImage, daPageImage, selectedDate).ShowDialog();
@@ -198,12 +170,13 @@ namespace MyScrapBook
                 foreach(ListViewItem item in listView.SelectedItems)
                 {
                     object[] key = { selectedDate, item.Tag };
-                    dsDB.Tables["pageImage"].Rows.Remove(dsDB.Tables["pageImage"].Rows.Find(key));
+                    dsDB.Tables["pageImage"].Rows.Find(key).Delete();
                     listView.Items.Remove(item);
                 }
                 OleDbCommandBuilder pageImageComBld = new OleDbCommandBuilder(daPageImage);
                 daPageImage.Update(dsDB, "pageImage");
                 listView.Update();
+
             }
         }
         private void update_listview()
@@ -213,6 +186,7 @@ namespace MyScrapBook
             picPage.Clear();
             daPageImage.Fill(dsDB, "pageImage");
             adptPicPage.Fill(picPage);
+            imageList.Images.Clear();
             int j = 0;
             foreach (DataRow r in picPage.Rows)
             {
@@ -228,6 +202,18 @@ namespace MyScrapBook
             listView.View = View.LargeIcon;
             listView.LargeImageList = imageList;
             listView.Update();
+        }
+        private void TextBoxComment_LostFocus(object sender, System.EventArgs e)
+        {
+            try
+            {
+                dsDB.Tables["Page"].Rows.Find(selectedDate.ToShortDateString())["pageComment"] = textBoxComment.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + " : " + ex.ToString());
+            }
+
         }
     }
 }

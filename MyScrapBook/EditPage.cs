@@ -27,13 +27,16 @@ namespace MyScrapBook
         private System.DateTime date;
         private DataTable tag;
         private DataTable picture;
-
+        OleDbCommandBuilder pageTagComBld;
+        OleDbCommandBuilder pageComBld;
 
         public EditPage(DateTime date)
         {
             InitializeComponent();
+            myEventInit();
             this.date = date;
             initDataset();
+
         }
 
        private void initDataset()
@@ -48,9 +51,11 @@ namespace MyScrapBook
                     Picture.imageComment from Picture Inner Join pageImage On Picture.imageNum=pageImage.imageNum
                     Where pageImage.pageDate=#" + date.ToShortDateString() + "#;", connexion);
             daPage = new OleDbDataAdapter("Select * from Page Where Page.pageDate=#" + date.ToShortDateString() + "#;", connexion);
+            pageComBld = new OleDbCommandBuilder(daPage);
             daPicture = new OleDbDataAdapter("Select * From Picture", connexion);
             daPageImage = new OleDbDataAdapter("Select * From pageImage", connexion);
             daPageTag = new OleDbDataAdapter("Select * From pageTag", connexion);
+            pageTagComBld = new OleDbCommandBuilder(daPageTag);
             dtsDb = new DataSet("Database");
             daPage.FillSchema(dtsDb, SchemaType.Source, "Page");
             daPicture.FillSchema(dtsDb, SchemaType.Source, "Picture");
@@ -68,21 +73,11 @@ namespace MyScrapBook
             daImage.Fill(picture);
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            Form page = new ViewPage(dtsDb,date);
-            page.MdiParent = MdiParent;
-            page.FormBorderStyle = FormBorderStyle.None;
-            page.Dock = DockStyle.Fill;
-            page.Show();
-            Close();
-        }
-
         private void EditPage_Load(object sender, EventArgs e)
         {
             load_Tag();
             load_Picture();
-            textBox1.Text = dtsDb.Tables["Page"].Rows[0]["pageComment"].ToString();
+            textBoxComment.Text = dtsDb.Tables["Page"].Rows[0]["pageComment"].ToString();
         }
 
         private void load_Tag()
@@ -147,31 +142,92 @@ namespace MyScrapBook
         private void buttonAddImage_Click(object sender, EventArgs e)
         {
             new PictureChoice(dtsDb, daPicture, daPageImage, date).ShowDialog();
-            update_listview();
+            Form edit = new EditPage(date);
+            edit.MdiParent = this.MdiParent;
+            edit.FormBorderStyle = FormBorderStyle.None;
+            edit.Dock = DockStyle.Fill;
+            edit.Show();
+            this.Close();
         }
 
-        private void update_listview()
+
+
+        private void buttonExit_Click(object sender, EventArgs e)
         {
-            Thread.Sleep(50);
-            listView.Items.Clear();
-            picture.Clear();
-            daPageImage.Fill(dtsDb, "pageImage");
-            daImage.Fill(picture);
-            int j = 0;
-            foreach (DataRow r in picture.Rows)
+            Form view = new ViewPage(dtsDb, date);
+            view.MdiParent = MdiParent;
+            view.FormBorderStyle = FormBorderStyle.None;
+            view.Dock = DockStyle.Fill;
+            Close();
+            view.Show();
+        }
+
+        private void pageTag_save()
+        {
+            object[] keys = new object[2];
+            foreach (DataRow r in dtsDb.Tables["Tag"].Rows)
             {
-                imageList.Images.Add(Image.FromFile(r["imagePath"].ToString()));
-                ListViewItem item = new ListViewItem();
-                item.ImageIndex = j;
-                item.Text = r["imageName"].ToString();
-                item.ToolTipText = r["imageComment"].ToString();
-                item.Tag = r["imageNum"];
-                listView.Items.Add(item);
-                j++;
+                DataRow row = dtsDb.Tables["pageTag"].NewRow();
+                keys[0] = row[0] = date;
+                keys[1] = row[1] = r[0];
+                if ((checkedListBoxTag.CheckedItems.Contains(r["tagName"])) && !dtsDb.Tables["pageTag"].Rows.Contains(keys))
+                {
+                    dtsDb.Tables["pageTag"].Rows.Add(row);
+                }
+                else if (!(checkedListBoxTag.CheckedItems.Contains(r["tagName"])) && dtsDb.Tables["pageTag"].Rows.Contains(keys))
+                {
+                    dtsDb.Tables["pageTag"].Rows.Find(keys).Delete();
+                }
             }
-            listView.View = View.LargeIcon;
-            listView.LargeImageList = imageList;
-            listView.Update();
+
+        }
+        private void CheckedListBoxTag_LostFocus(object sender, EventArgs e)
+        {
+            pageTag_save();
+            daPageTag.Update(dtsDb, "pageTag");
+        }
+        private void TextBoxComment_LostFocus(object sender, EventArgs e)
+        {
+            dtsDb.Tables["Page"].Rows.Find(date)["pageComment"] = textBoxComment.Text;
+            daPage.Update(dtsDb, "Page");
+        }
+
+        private void buttonDeleteImage_Click(object sender, EventArgs e)
+        {
+            if (listView.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("画像は選択されていません。");
+            }
+            else
+            {
+                object[] keys = new object[2];
+                keys[0] = date;
+                foreach (ListViewItem item in listView.SelectedItems )
+                {
+                    keys[1] = item.Tag;
+                    dtsDb.Tables["pageImage"].Rows.Find(keys).Delete();
+                    listView.Items.Remove(item);
+                }
+                listView.Update();
+                OleDbCommandBuilder pageImageComBld = new OleDbCommandBuilder(daPageImage);
+                daPageImage.Update(dtsDb, "pageImage");
+            }
+        }
+
+        private void buttonDelAll_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("このページのすべてを削除しますが、よろしいですか？","削除確認",MessageBoxButtons.YesNo)== DialogResult.Yes)
+            {
+                dtsDb.Tables["Page"].Rows.Find(date).Delete();
+                daPage.Update(dtsDb, "Page");
+                Thread.Sleep(500);
+                Form main = new MainPage();
+                main.MdiParent = MdiParent;
+                main.FormBorderStyle = FormBorderStyle.None;
+                main.Dock = DockStyle.Fill;
+                Close();
+                main.Show();
+            }
         }
     }
 }

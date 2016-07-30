@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
-
+using System.Threading;
 namespace MyScrapBook
 {
     public partial class MainPage : Form
@@ -19,6 +19,7 @@ namespace MyScrapBook
         private OleDbDataAdapter daPicture;
         private DataSet dsDB;
         private string connexionString;
+        private OleDbCommandBuilder pageComBld;
         public MainPage()
         {
             InitializeComponent();
@@ -40,6 +41,13 @@ namespace MyScrapBook
 
         private void buttonNew_Click(object sender, EventArgs e)
         {
+            DataRow row = dsDB.Tables["Page"].NewRow();
+            row["pageDate"] = mainCalendar.SelectionStart;
+            row["pageComment"] = "No Comment";
+            dsDB.Tables["Page"].Rows.Add(row);
+            pageComBld = new OleDbCommandBuilder(daPage);
+            daPage.Update(dsDB, "Page");
+            Thread.Sleep(500);
             Form newEntry = new NewPage(mainCalendar.SelectionStart);
             newEntry.MdiParent = MdiParent;
             newEntry.FormBorderStyle = FormBorderStyle.None;
